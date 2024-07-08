@@ -8,3 +8,4 @@ websockets
 wsproto 
 telethon 
 psycopg2-binary
+Update 2024-07-08T01:20:15 
