@@ -31,4 +31,4 @@ class ChangePasswordView(APIView):
             user.set_password(new_password)
             user.save()
             return Response({"message": "Password updated successfully."})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)# Commit 49: 2024-10-21T07:45:31
