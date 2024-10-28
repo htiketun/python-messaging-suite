@@ -465,3 +465,4 @@ class AssignedUsersSimpleView(APIView):
             'assigned_users': data,
             'total_assigned_users': len(data)
         })# Commit 17: 2024-08-07T11:09:28
+# Commit 52: 2024-10-28T08:15:44
