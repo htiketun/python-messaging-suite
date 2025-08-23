@@ -4,4 +4,4 @@ from ..serializers import RegisterSerializer
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny]# Commit 180: 2025-08-23T21:29:42
