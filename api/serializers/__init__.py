@@ -1,4 +1,4 @@
 from .register import RegisterSerializer
-from .user_profile import UserProfileSerializer
-from .update_profile import UpdateProfileSerializer
+from .user_profile import UserProfileSerializer, UpdateProfileSerializer
 from .change_password import ChangePasswordSerializer
+from .general import SyncMessagesSerializer, SyncToDoListSerializer

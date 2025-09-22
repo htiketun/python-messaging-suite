@@ -6,7 +6,11 @@ from .views import (
     LogoutView, 
     ProfileView, 
     UpdateProfileView, 
-    ChangePasswordView
+    ChangePasswordView,
+    SyncSavedMessages,
+    GetSyncedSavedMessages,
+    SyncToDoList,
+    GetSyncedToDoList 
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -19,4 +23,8 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='get_profile'),
     path('profile/update/', UpdateProfileView.as_view(), name='update_profile'),
     path('profile/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('sync-saved-messages/', SyncSavedMessages.as_view(), name='saved-messages-sync'),
+    path('get-synced-saved-messages/', GetSyncedSavedMessages.as_view(), name='saved-messages-index'),
+    path('sync-todo-list/', SyncToDoList.as_view(), name='todo-list-sync'),
+    path('get-synced-todo-list/', GetSyncedToDoList.as_view(), name='todo-list-index'),
 ]
