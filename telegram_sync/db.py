@@ -46,6 +46,15 @@ async def upsert_telegram_account(conn, session_file, me):
         (me.photo and str(me.photo)) or None
     )
 
+async def get_chat_ids_from_telegram_chat(conn, session_file):
+    result = await conn.fetch(
+        """
+        SELECT id FROM telegram_chats WHERE session = $1 AND type = $2
+        """,
+        os.path.basename(session_file),
+        "private"
+    )
+    return [row['id'] for row in result] if result else []
 
 # Utility functions for state management
 async def get_last_synced_message(conn, session, chat_id, newest=True):

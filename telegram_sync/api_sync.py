@@ -1,16 +1,49 @@
-from fastapi import FastAPI, BackgroundTasks
-import asyncio
-from telegram_sync.sync_chats import main as sync_chats_main
-from telegram_sync.sync_messages import main as sync_messages_main
+from fastapi import FastAPI, BackgroundTasks, Query
+from pydantic import BaseModel
+import telegram_sync.sync_messages as sync_messages
+import telegram_sync.sync_chats as sync_chats
+import telegram_sync.session_manager as sm
 
 app = FastAPI()
 
-@app.post("/telegram-chats")
-async def trigger_sync(background_tasks: BackgroundTasks):
-    background_tasks.add_task(asyncio.run, sync_chats_main())
-    return {"status": "Sync started in background"}
+class SyncRequest(BaseModel):
+    session_file: str = None
+    chat_id: int = None
+    direction: str = "new"
+    limit: int = 100
 
-@app.post("/telegram-messages")
-async def trigger_sync(full: bool = False, session_file: str = None, chat_id: int = None, background_tasks: BackgroundTasks = None):
-    background_tasks.add_task(asyncio.run, sync_messages_main(full_sync=full, session_files=[session_file], chat_id=chat_id))
-    return {"status": "Sync started in background", "full_sync": full}
+@app.post("/telegram-chats/")
+async def sync_chats_api(session_file: str = None):
+    """
+    Trigger Telegram chat sync. Optionally provide a session file.
+    """
+    session_files = [session_file] if session_file else None
+    session_files = sm.get_session_files(session_files)
+    try:
+        await sync_chats.main(session_files=session_files)
+        return {"status": "success", "message": "Chats synced successfully"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
+
+# curl -X POST "http://localhost:8000/telegram-chats/?session_file=path/to/session.session"
+# curl -X POST "http://localhost:8000/telegram-chats/"
+@app.post("/telegram-messages/")
+async def sync_messages_api(req: SyncRequest):
+    session_files = [req.session_file] if req.session_file else None
+    session_files = sm.get_session_files(session_files)
+    # You may want to validate session_file path here!
+    try:
+        await sync_messages.main(
+            full_sync=False,
+            session_files=session_files,
+            chat_id=req.chat_id,
+            direction=req.direction,
+            limit=req.limit
+        )
+        return {"status": "success"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
+    
+#     curl -X POST http://localhost:8000/sync-messages/ \
+#   -H "Content-Type: application/json" \
+#   -d '{"session_file": "path/to/session.session", "chat_id": 123456, "direction": "new", "limit": 100}'

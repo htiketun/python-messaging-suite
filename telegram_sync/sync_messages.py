@@ -54,15 +54,21 @@ async def sync_dialog_messages(client, conn, sync_session, dialog_id, direction=
             await db.set_last_synced_message(conn, sync_session, dialog_id, oldest_synced_id, oldest_message_time, newest=False)
         await asyncio.sleep(1)
 
-async def fetch_and_sync_messages(session_file, conn, full_sync=False, chat_id=None, direction="latest", limit=10):
+async def fetch_and_sync_messages(session_file, conn, chat_id=None, direction="latest", limit=10):
+
     async with TelegramClient(session_file, config.TELEGRAM_API_ID, config.TELEGRAM_API_HASH) as client:
         sync_session = os.path.basename(session_file)
         if chat_id:
             dialog = await client.get_entity(chat_id)
             await sync_dialog_messages(client, conn, sync_session, dialog.id, direction=direction, limit=limit)
         else:
-            async for dialog in client.iter_dialogs():
-                await sync_dialog_messages(client, conn, sync_session, dialog.id, direction=direction, limit=limit)
+            chat_ids = await db.get_chat_ids_from_telegram_chat(conn, sync_session)
+            print(f"Found {len(chat_ids) if chat_ids else 0} chats for session {sync_session}")
+            if chat_ids:
+                for cid in chat_ids:
+                    await sync_dialog_messages(client, conn, sync_session, cid, direction=direction, limit=limit)
+            else:
+                print(f"No chats found for session {sync_session}. Please run sync_chats.py first.")
 
 async def main(full_sync=False, session_files=None, chat_id=None, direction="latest", limit=10):
     if session_files is None:
@@ -74,7 +80,7 @@ async def main(full_sync=False, session_files=None, chat_id=None, direction="lat
     conn = await db.get_db()
     for sess in session_files:
         try:
-            await fetch_and_sync_messages(sess, conn, full_sync=full_sync, chat_id=chat_id, direction=direction, limit=limit)
+            await fetch_and_sync_messages(sess, conn, chat_id=chat_id, direction=direction, limit=limit)
         except errors.FloodWaitError as e:
             print(f"FloodWait: Sleeping for {e.seconds} seconds...")
             await asyncio.sleep(e.seconds)

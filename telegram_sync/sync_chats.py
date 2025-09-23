@@ -130,9 +130,10 @@ async def fetch_and_sync(session_file, conn):
         print(msg)
         logging.error(msg)
 
-async def main():
+async def main(session_files=None):
     logging.info("Started sync_chats.py")
-    session_files = sm.get_session_files()
+    if session_files is None:
+        session_files = sm.get_session_files()
     if not session_files:
         msg = "No session files found. Use add_session.py first."
         print(msg)
@@ -156,4 +157,10 @@ async def main():
     logging.info("Finished sync_chats.py")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--session_file", type=str, help="Path to the session file")
+    args = parser.parse_args()
+    session_files = [args.session_file] if args.session_file else None
+    session_files = sm.get_session_files(session_files)
+    asyncio.run(main(session_files=session_files))
