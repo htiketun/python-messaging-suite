@@ -23,10 +23,19 @@ async def websocket_sync_chats(ws: WebSocket):
         await ws.send_json({"status": "progress", "message": "Starting chat sync..."})
         await sync_chats.main(session_files=session_files)
         await ws.send_json({"status": "success", "message": "Chats synced successfully"})
+    except WebSocketDisconnect:
+        # Client disconnected, no further action needed
+        pass
     except Exception as e:
-        await ws.send_json({"status": "error", "detail": str(e)})
+        try:
+            await ws.send_json({"status": "error", "detail": str(e)})
+        except Exception:
+            pass
     finally:
-        await ws.close()
+        try:
+            await ws.close()
+        except Exception:
+            pass
 
 @app.websocket("/ws/telegram-messages/")
 async def websocket_sync_messages(ws: WebSocket):
@@ -36,7 +45,7 @@ async def websocket_sync_messages(ws: WebSocket):
         session_file = data.get("session_file")
         chat_id = data.get("chat_id")
         direction = data.get("direction", "new")
-        limit = data.get("limit", 100)
+        limit = data.get("limit", 10)
         session_files = [session_file] if session_file else None
         session_files = sm.get_session_files(session_files)
         await ws.send_json({"status": "progress", "message": "Starting message sync..."})
@@ -48,10 +57,19 @@ async def websocket_sync_messages(ws: WebSocket):
             limit=limit
         )
         await ws.send_json({"status": "success", "message": "Messages synced successfully"})
+    except WebSocketDisconnect:
+        # Client disconnected, no further action needed
+        pass
     except Exception as e:
-        await ws.send_json({"status": "error", "detail": str(e)})
+        try:
+            await ws.send_json({"status": "error", "detail": str(e)})
+        except Exception:
+            pass
     finally:
-        await ws.close()
+        try:
+            await ws.close()
+        except Exception:
+            pass
 
 # Connect to ws://localhost:8000/ws/telegram-chats/ (as a WebSocket client)
 # Send: {"session_file": "path/to/session.session"} (or {} for all)
