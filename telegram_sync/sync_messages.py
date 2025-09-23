@@ -5,7 +5,7 @@ import telegram_sync.config as config
 import telegram_sync.session_manager as sm
 import telegram_sync.db as db
 
-async def sync_dialog_messages(client, conn, sync_session, dialog_id, direction="latest", limit=10):
+async def sync_dialog_messages(client, conn, telegram_account_id, dialog_id, direction="latest", limit=10):
     """
     direction: "latest" (default) for latest N messages, "new" for messages after last synced, "old" for messages before oldest synced
     """
@@ -14,18 +14,18 @@ async def sync_dialog_messages(client, conn, sync_session, dialog_id, direction=
         messages = [msg async for msg in client.iter_messages(dialog_id, limit=limit)]
         print(f"Initial load for dialog {dialog_id}, fetched {len(messages)} messages")
         for msg in reversed(messages):  # Oldest first
-            await db.upsert_message(conn, sync_session, dialog_id, msg)
+            await db.upsert_message(conn, telegram_account_id, dialog_id, msg)
         if messages:
-            await db.set_last_synced_message(conn, sync_session, dialog_id, messages[0].id, messages[0].date)  # oldest
-            await db.set_last_synced_message(conn, sync_session, dialog_id, messages[-1].id, messages[-1].date)  # newest
+            await db.set_last_synced_message(conn, telegram_account_id, dialog_id, messages[0].id, messages[0].date)  # oldest
+            await db.set_last_synced_message(conn, telegram_account_id, dialog_id, messages[-1].id, messages[-1].date)  # newest
         await asyncio.sleep(1)
     elif direction == "new":
         # Fetch messages after last synced (newer messages)
-        last_synced_id = await db.get_last_synced_message(conn, sync_session, dialog_id, newest=True)
+        last_synced_id = await db.get_last_synced_message(conn, telegram_account_id, dialog_id, newest=True)
         total_msgs = 0
         last_message_time = None
         async for msg in client.iter_messages(dialog_id, min_id=(last_synced_id or 0)):
-            await db.upsert_message(conn, sync_session, dialog_id, msg)
+            await db.upsert_message(conn, telegram_account_id, dialog_id, msg)
             print(f"New message for dialog {dialog_id}, ID {msg.id}")
             if not last_synced_id or msg.id > last_synced_id:
                 last_synced_id = msg.id
@@ -34,15 +34,15 @@ async def sync_dialog_messages(client, conn, sync_session, dialog_id, direction=
             if total_msgs % 100 == 0:
                 await asyncio.sleep(1)
         if last_synced_id and last_message_time:
-            await db.set_last_synced_message(conn, sync_session, dialog_id, last_synced_id, last_message_time, newest=True)
+            await db.set_last_synced_message(conn, telegram_account_id, dialog_id, last_synced_id, last_message_time, newest=True)
         await asyncio.sleep(1)
     elif direction == "old":
         # Fetch messages before oldest synced (older messages)
-        oldest_synced_id = await db.get_last_synced_message(conn, sync_session, dialog_id, newest=False)
+        oldest_synced_id = await db.get_last_synced_message(conn, telegram_account_id, dialog_id, newest=False)
         total_msgs = 0
         oldest_message_time = None
         async for msg in client.iter_messages(dialog_id, max_id=(oldest_synced_id or 0), reverse=True, limit=limit):
-            await db.upsert_message(conn, sync_session, dialog_id, msg)
+            await db.upsert_message(conn, telegram_account_id, dialog_id, msg)
             print(f"Old message for dialog {dialog_id}, ID {msg.id}")
             if not oldest_synced_id or msg.id < oldest_synced_id:
                 oldest_synced_id = msg.id
@@ -51,24 +51,23 @@ async def sync_dialog_messages(client, conn, sync_session, dialog_id, direction=
             if total_msgs % 100 == 0:
                 await asyncio.sleep(1)
         if oldest_synced_id and oldest_message_time:
-            await db.set_last_synced_message(conn, sync_session, dialog_id, oldest_synced_id, oldest_message_time, newest=False)
+            await db.set_last_synced_message(conn, telegram_account_id, dialog_id, oldest_synced_id, oldest_message_time, newest=False)
         await asyncio.sleep(1)
 
 async def fetch_and_sync_messages(session_file, conn, chat_id=None, direction="latest", limit=10):
-
+    telegram_account_id = await db.get_telegram_account_id(conn, session_file)  
     async with TelegramClient(session_file, config.TELEGRAM_API_ID, config.TELEGRAM_API_HASH) as client:
-        sync_session = os.path.basename(session_file)
         if chat_id:
             dialog = await client.get_entity(chat_id)
-            await sync_dialog_messages(client, conn, sync_session, dialog.id, direction=direction, limit=limit)
+            await sync_dialog_messages(client, conn, telegram_account_id, dialog.id, direction=direction, limit=limit)
         else:
-            chat_ids = await db.get_chat_ids_from_telegram_chat(conn, sync_session)
-            print(f"Found {len(chat_ids) if chat_ids else 0} chats for session {sync_session}")
+            chat_ids = await db.get_chat_ids_from_telegram_chat(conn, telegram_account_id)
+            print(f"Found {len(chat_ids) if chat_ids else 0} chats for account {telegram_account_id}")
             if chat_ids:
                 for cid in chat_ids:
-                    await sync_dialog_messages(client, conn, sync_session, cid, direction=direction, limit=limit)
+                    await sync_dialog_messages(client, conn, telegram_account_id, cid, direction=direction, limit=limit)
             else:
-                print(f"No chats found for session {sync_session}. Please run sync_chats.py first.")
+                print(f"No chats found for account {telegram_account_id}. Please run sync_chats.py first.")
 
 async def main(full_sync=False, session_files=None, chat_id=None, direction="latest", limit=10):
     if session_files is None:

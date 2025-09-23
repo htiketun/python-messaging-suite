@@ -12,6 +12,12 @@ from .views import (
     SyncToDoList,
     GetSyncedToDoList 
 )
+from api.views.telegram_chat import (
+    TelegramChatListView,
+    TelegramChatDetailView,
+    TelegramChatMessagesView,
+    SendMessageView,
+)
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -27,4 +33,8 @@ urlpatterns = [
     path('get-synced-saved-messages/', GetSyncedSavedMessages.as_view(), name='saved-messages-index'),
     path('sync-todo-list/', SyncToDoList.as_view(), name='todo-list-sync'),
     path('get-synced-todo-list/', GetSyncedToDoList.as_view(), name='todo-list-index'),
+    path('chats/', TelegramChatListView.as_view(), name='chat-list'),
+    path('chats/<str:id>/', TelegramChatDetailView.as_view(), name='chat-detail'),
+    path('chats/<str:id>/messages/', TelegramChatMessagesView.as_view(), name='chat-messages'),
+    path('chats/<str:id>/send/', SendMessageView.as_view(), name='chat-send-message'),
 ]

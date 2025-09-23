@@ -75,7 +75,7 @@
             "_": "Photo",
             "id": 6226725504661178401,
             "access_hash": -1262981843896040316,
-            "file_reference": "AGjRQoTDdFxAyj0nsQFmvDGu0SNq",
+            "file_reference": "AGjSjY4KvNmNzbjYrSj0/OuAhcDc",
             "date": "2025-09-18T16:47:27+00:00",
             "sizes": [
                 {
@@ -189,7 +189,7 @@
             },
             "status": {
                 "_": "UserStatusOffline",
-                "was_online": "2025-09-22T12:32:08+00:00"
+                "was_online": "2025-09-23T11:58:04+00:00"
             },
             "bot_info_version": null,
             "restriction_reason": [],

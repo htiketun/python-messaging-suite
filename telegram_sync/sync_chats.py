@@ -75,8 +75,20 @@ async def fetch_and_sync(session_file, conn):
             print(msg)
             logging.warning(msg)
             return
-
+        
         me = await client.get_me()
+
+        telegram_account_id = await db.get_telegram_account_id(conn, session_file)
+        if not telegram_account_id:
+            await db.upsert_telegram_account(conn, session_file, me)
+            telegram_account_id = await db.get_telegram_account_id(conn, session_file)
+
+        if not telegram_account_id:
+            msg = f"Failed to get or create telegram_account_id for session {session_file}. Skipping."
+            print(msg)
+            logging.error(msg)
+            await client.disconnect()
+            return
 
         full = await client(GetFullUserRequest(me.username)) if me.username else None
         # Save the full user info as JSON for inspection
@@ -110,7 +122,7 @@ async def fetch_and_sync(session_file, conn):
         print(msg)
 
         async for dialog in client.iter_dialogs():
-            await db.upsert_chat(conn, os.path.basename(session_file), dialog)
+            await db.upsert_chat(conn, telegram_account_id, dialog)
             await db.upsert_telegram_account(conn, session_file, me)
 
         await asyncio.sleep(2)
@@ -126,7 +138,8 @@ async def fetch_and_sync(session_file, conn):
         print(msg)
         logging.warning(msg)
     except Exception as e:
-        msg = f"Error in fetch_and_sync for {session_file}: {e}"
+        # want to get error line number
+        msg = f"Error with session {session_file}: {e}"
         print(msg)
         logging.error(msg)
 

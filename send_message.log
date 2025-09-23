@@ -1,0 +1,120 @@
+2025-09-23 17:47:52,580 INFO:Attempting to send message to chat_id=7127517690 by telegram_account_id=1: Hello from API
+2025-09-23 17:47:52,582 INFO:Connecting to 149.154.167.51:443/TcpFull...
+2025-09-23 17:47:52,779 INFO:Connection to 149.154.167.51:443/TcpFull complete!
+2025-09-23 17:49:49,810 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:49:51,029 ERROR:Internal Server Error: /api/chats/7127517690/send/1/
+Traceback (most recent call last):
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py", line 118, in post
+    session_file = sm.telegram_account.session_file  # Path to .session file
+                   ^^
+NameError: name 'sm' is not defined
+2025-09-23 17:49:51,030 ERROR:Internal Server Error: /api/chats/7127517690/send/1/
+Traceback (most recent call last):
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py", line 118, in post
+    session_file = sm.telegram_account.session_file  # Path to .session file
+                   ^^
+NameError: name 'sm' is not defined
+2025-09-23 17:49:52,820 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:50:01,866 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:50:21,141 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:50:23,055 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:50:26,454 WARNING:Method Not Allowed: /api/chats/7127517690/send/1/
+2025-09-23 17:50:39,268 ERROR:Internal Server Error: /api/chats/7127517690/send/1/
+Traceback (most recent call last):
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\laragon\bin\python\python-3.13\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py", line 117, in post
+    session_file = config.SESSION_FOLDER / telegram_account.session_file  # Path to .session file
+                   ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for /: 'str' and 'str'
+2025-09-23 17:50:55,755 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:50:57,710 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:51:32,321 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:51:40,326 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:52:08,819 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:52:10,753 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:52:24,038 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:52:43,354 WARNING:Method Not Allowed: /api/chats/7127517690/send/1/
+2025-09-23 17:52:45,532 INFO:Attempting to send message to chat_id=7127517690 by telegram_account_id=1: Hello from API
+2025-09-23 17:52:45,588 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-09-23 17:52:45,648 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-09-23 17:52:46,197 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-09-23 17:52:46,197 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-09-23 17:52:46,203 INFO:Message sent to chat_id=7127517690 by telegram_account_id=1: Hello from API
+2025-09-23 17:55:38,124 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:55:43,130 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:55:50,159 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 17:56:03,344 INFO:Attempting to send message to chat_id=7127517690 by telegram_account_id=1: Hello from API 2
+2025-09-23 17:56:03,381 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-09-23 17:56:03,417 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-09-23 17:56:03,845 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-09-23 17:56:03,846 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-09-23 17:56:03,851 INFO:Message sent to chat_id=7127517690 by telegram_account_id=1: Hello from API 2
+2025-09-23 17:59:13,639 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:00:32,127 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:00:51,374 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:01:02,483 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:01:08,486 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:01:10,448 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:01:13,404 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:10,486 INFO:C:\laragon\www\python-messaging-suite\api\urls.py changed, reloading.
+2025-09-23 18:02:21,634 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:23,629 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:25,567 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:29,531 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:41,631 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:44,583 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:47,516 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.
+2025-09-23 18:02:53,486 INFO:C:\laragon\www\python-messaging-suite\api\views\telegram_chat.py changed, reloading.

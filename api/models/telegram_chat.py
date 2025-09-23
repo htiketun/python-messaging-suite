@@ -2,7 +2,7 @@ from django.db import models
 
 class TelegramChat(models.Model):
     id = models.BigIntegerField(primary_key=True, db_index=True)
-    session = models.TextField(db_index=True)
+    telegram_account_id = models.BigIntegerField(db_index=True)
     name = models.TextField()
     type = models.TextField()
     username = models.TextField(null=True, blank=True)
@@ -10,7 +10,11 @@ class TelegramChat(models.Model):
     oldest_message_time = models.DateTimeField(null=True, blank=True)
     last_message_id = models.BigIntegerField(null=True, blank=True, db_index=True)
     last_message_time = models.DateTimeField(null=True, blank=True)
+    photo = models.TextField(null=True, blank=True)
+    gender = models.CharField(max_length=10, blank=True, null=True)
+    is_favorite = models.BooleanField(default=False, null=True)
+    is_active = models.BooleanField(default=True, null=True)
 
     class Meta:
-        unique_together = ('id', 'session')
+        unique_together = ('id', 'telegram_account_id')
         db_table = 'telegram_chats'

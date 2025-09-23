@@ -2,3 +2,4 @@ from .register import RegisterSerializer
 from .user_profile import UserProfileSerializer, UpdateProfileSerializer
 from .change_password import ChangePasswordSerializer
 from .general import SyncMessagesSerializer, SyncToDoListSerializer
+# from .telegram_chat import TelegramSessionSerializer
