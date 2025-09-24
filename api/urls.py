@@ -10,9 +10,11 @@ from .views import (
     SyncSavedMessages,
     GetSyncedSavedMessages,
     SyncToDoList,
-    GetSyncedToDoList 
+    GetSyncedToDoList,
+    csrf_cookie
 )
 from api.views.telegram_chat import (
+    TelegramAccountListView,
     TelegramChatListView,
     TelegramChatDetailView,
     TelegramChatMessagesView,
@@ -33,8 +35,10 @@ urlpatterns = [
     path('get-synced-saved-messages/', GetSyncedSavedMessages.as_view(), name='saved-messages-index'),
     path('sync-todo-list/', SyncToDoList.as_view(), name='todo-list-sync'),
     path('get-synced-todo-list/', GetSyncedToDoList.as_view(), name='todo-list-index'),
+    path('telegram/accounts/', TelegramAccountListView.as_view(), name='telegram-account-list'),
     path('chats/', TelegramChatListView.as_view(), name='chat-list'),
     path('chats/<str:id>/', TelegramChatDetailView.as_view(), name='chat-detail'),
     path('chats/<str:id>/messages/', TelegramChatMessagesView.as_view(), name='chat-messages'),
     path('chats/<str:id>/send/', SendMessageView.as_view(), name='chat-send-message'),
+    path('sanctum/csrf-cookie/', csrf_cookie),  # Dummy endpoint for CSRF cookie
 ]

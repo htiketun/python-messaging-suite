@@ -12,9 +12,15 @@ from telethon.sync import TelegramClient
 import telegram_sync.config as config
 import asyncio
 import os
-
-class TelegramChatListView(generics.ListAPIView):
+class TelegramAccountListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = None  # No serializer needed for listing accounts
+
+    def get(self, request, *args, **kwargs):
+        accounts = TelegramAccount.objects.all().values('id', 'session_file', 'phone', 'username', 'first_name', 'last_name', 'photo', 'unread_count', 'is_active', 'last_seen')
+        return Response(list(accounts), status=status.HTTP_200_OK)
+class TelegramChatListView(generics.ListAPIView):
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = TelegramChatSerializer
 
     def get_queryset(self): 
@@ -23,7 +29,7 @@ class TelegramChatListView(generics.ListAPIView):
             return TelegramChat.objects.none()
         return TelegramChat.objects.filter(
             telegram_account_id=telegram_account_id
-        ).order_by('last_message_time')
+        ).order_by('-last_message_id')
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -87,7 +93,7 @@ class TelegramChatMessagesView(generics.ListAPIView):
 
     def get_queryset(self):
         chat_id = self.kwargs['id']
-        return TelegramMessage.objects.filter(chat_id=chat_id).order_by('-date')
+        return TelegramMessage.objects.filter(chat_id=chat_id).order_by('date')
 
 class SendMessageView(APIView):
     permission_classes = [permissions.IsAuthenticated]

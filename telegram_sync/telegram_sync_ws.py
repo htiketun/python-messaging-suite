@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import telegram_sync.sync_messages as sync_messages
 import telegram_sync.sync_chats as sync_chats
 import telegram_sync.session_manager as sm
+import asyncio
 
 app = FastAPI()
 
@@ -20,11 +21,14 @@ async def websocket_sync_chats(ws: WebSocket):
         session_file = data.get("session_file")
         session_files = [session_file] if session_file else None
         session_files = sm.get_session_files(session_files)
-        await ws.send_json({"status": "progress", "message": "Starting chat sync..."})
-        await sync_chats.main(session_files=session_files)
-        await ws.send_json({"status": "success", "message": "Chats synced successfully"})
+        await ws.send_json({"status": "progress", "message": "Starting chat sync loop..."})
+
+        while True:
+            await sync_chats.main(session_files=session_files)
+            await ws.send_json({"status": "success", "message": "Chats synced successfully"})
+            await asyncio.sleep(2)  # Wait 2 seconds before next sync
+
     except WebSocketDisconnect:
-        # Client disconnected, no further action needed
         pass
     except Exception as e:
         try:
@@ -48,15 +52,19 @@ async def websocket_sync_messages(ws: WebSocket):
         limit = data.get("limit", 10)
         session_files = [session_file] if session_file else None
         session_files = sm.get_session_files(session_files)
-        await ws.send_json({"status": "progress", "message": "Starting message sync..."})
-        await sync_messages.main(
-            full_sync=False,
-            session_files=session_files,
-            chat_id=chat_id,
-            direction=direction,
-            limit=limit
-        )
-        await ws.send_json({"status": "success", "message": "Messages synced successfully"})
+        await ws.send_json({"status": "progress", "message": "Starting message sync loop..."})
+
+        while True:
+            await sync_messages.main(
+                full_sync=False,
+                session_files=session_files,
+                chat_id=chat_id,
+                direction=direction,
+                limit=limit
+            )
+            await ws.send_json({"status": "success", "message": "Messages synced successfully"})
+            await asyncio.sleep(2)  # Wait 2 seconds before next sync
+
     except WebSocketDisconnect:
         # Client disconnected, no further action needed
         pass

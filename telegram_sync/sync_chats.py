@@ -1,4 +1,3 @@
-
 import asyncio
 import json
 import os
@@ -72,22 +71,36 @@ async def fetch_and_sync(session_file, conn):
         if not await client.is_user_authorized():
             await client.disconnect()
             os.remove(session_file)
-            msg = f"Session file {session_file} exists but Telegram session is unauthorized. Skipping."
-            print(msg)
-            logging.warning(msg)
+            # msg = f"Session file {session_file} exists but Telegram session is unauthorized. Skipping."
+            # print(msg)
+            # logging.warning(msg)
             return
-        
+        import base64
         me = await client.get_me()
+        counts = 0
+        me_name = getattr(me, 'first_name', 'Me')
+        me_photo_filename = f"telegram_photo/{me.id}/{me_name}_photo.jpg"
+        me_base64_str = None
+        if os.path.exists(me_photo_filename):
+            with open(me_photo_filename, "rb") as image_file:
+                me_base64_str = base64.b64encode(image_file.read()).decode("utf-8")
+        else:
+            me_photo_path = await client.download_profile_photo(me, file=me_photo_filename)
+            if me_photo_path and os.path.exists(me_photo_path):
+                with open(me_photo_path, "rb") as image_file:
+                    me_base64_str = base64.b64encode(image_file.read()).decode("utf-8")
+                # Do not remove the photo file, keep for future use
+
 
         telegram_account_id = await db.get_telegram_account_id(conn, session_file)
         if not telegram_account_id:
-            await db.upsert_telegram_account(conn, session_file, me)
+            await db.upsert_telegram_account(conn, session_file, me, counts, me_base64_str)
             telegram_account_id = await db.get_telegram_account_id(conn, session_file)
 
         if not telegram_account_id:
-            msg = f"Failed to get or create telegram_account_id for session {session_file}. Skipping."
-            print(msg)
-            logging.error(msg)
+            # msg = f"Failed to get or create telegram_account_id for session {session_file}. Skipping."
+            # print(msg)
+            # logging.error(msg)
             await client.disconnect()
             return
 
@@ -95,7 +108,6 @@ async def fetch_and_sync(session_file, conn):
         # Save the full user info as JSON for inspection
         session_dir = os.path.dirname(session_file)
         full_json_path = os.path.join(session_dir, os.path.basename(session_file) + ".full.json")
-        import base64
         def convert_datetime(obj):
             if isinstance(obj, dict):
                 return {k: convert_datetime(v) for k, v in obj.items()}
@@ -107,7 +119,7 @@ async def fetch_and_sync(session_file, conn):
             elif hasattr(obj, "isoformat") and callable(obj.isoformat):
                 return obj.isoformat()
             else:
-                return obj
+                return obj 
 
         with open(full_json_path, "w", encoding="utf-8") as f:
             full_dict = full.to_dict() if full else {}
@@ -123,8 +135,33 @@ async def fetch_and_sync(session_file, conn):
         print(msg)
 
         async for dialog in client.iter_dialogs():
-            await db.upsert_chat(conn, telegram_account_id, dialog)
-            await db.upsert_telegram_account(conn, session_file, me)
+            if dialog.is_user:
+                #logg message detail
+                if dialog.unread_count > 0:
+                    counts += dialog.unread_count
+                entity = dialog.entity
+                name = getattr(entity, 'title', getattr(entity, 'first_name', 'Unknown'))
+                photo_filename = f"telegram_photo/{me.id}/{entity.id}_photo.jpg"
+                base64_str = None
+
+                if os.path.exists(photo_filename):
+                    # Use existing photo
+                    with open(photo_filename, "rb") as image_file:
+                        base64_str = base64.b64encode(image_file.read()).decode("utf-8")
+                else:
+                    # Download profile photo only once
+                    photo_path = await client.download_profile_photo(entity, file=photo_filename)
+                    if photo_path and os.path.exists(photo_path):
+                        with open(photo_path, "rb") as image_file:
+                            base64_str = base64.b64encode(image_file.read()).decode("utf-8")
+                        # Optionally, keep the file for future use (do not remove)
+                        # os.remove(photo_path)  # Remove only if you don't want to keep
+
+                await db.upsert_chat(conn, telegram_account_id, dialog, base64_str)
+                await db.upsert_message(conn, telegram_account_id, dialog.id, dialog.message)
+
+
+        await db.upsert_telegram_account(conn, session_file, me, counts, me_base64_str)
 
         await asyncio.sleep(2)
         await client.disconnect()
@@ -135,23 +172,23 @@ async def fetch_and_sync(session_file, conn):
         except Exception:
             pass
         os.remove(session_file)
-        msg = f"Session file {session_file} exists but Telegram session is unauthorized. Skipping."
-        print(msg)
-        logging.warning(msg)
+        # msg = f"Session file {session_file} exists but Telegram session is unauthorized. Skipping."
+        # print(msg)
+        # logging.warning(msg)
     except Exception as e:
         # want to get error line number
-        msg = f"Error with session {session_file}: {e}"
-        print(msg)
+        # msg = f"Error with session {session_file}: {e}"
+        # print(msg)
         logging.error(msg)
 
 async def main(session_files=None):
-    logging.info("Started sync_chats.py")
+    # logging.info("Started sync_chats.py")
     if session_files is None:
         session_files = sm.get_session_files()
     if not session_files:
-        msg = "No session files found. Use add_session.py first."
-        print(msg)
-        logging.warning(msg)
+        # msg = "No session files found. Use add_session.py first."
+        # print(msg)
+        # logging.warning(msg)
         return
 
     conn = await db.get_db()
@@ -159,16 +196,16 @@ async def main(session_files=None):
         try:
             await fetch_and_sync(sess, conn)
         except errors.FloodWaitError as e:
-            msg = f"FloodWait: Sleeping for {e.seconds} seconds..."
-            print(msg)
-            logging.warning(msg)
+            # msg = f"FloodWait: Sleeping for {e.seconds} seconds..."
+            # print(msg)
+            # logging.warning(msg)
             await asyncio.sleep(e.seconds)
         except Exception as e:
             msg = f"Error with session {sess}: {e}"
-            print(msg)
+            # print(msg)
             logging.error(msg)
     await conn.close()
-    logging.info("Finished sync_chats.py")
+    # logging.info("Finished sync_chats.py")
 
 if __name__ == "__main__":
     import argparse

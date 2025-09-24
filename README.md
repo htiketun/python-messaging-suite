@@ -54,7 +54,7 @@ python-messaging-suite/
 ```sh
 pip install -r requirements.txt
 # Or manually:
-pip install django djangorestframework djangorestframework-simplejwt fastapi uvicorn telethon psycopg2-binary gender-guesser name-dataset
+pip install django djangorestframework django-cors-headers djangorestframework-simplejwt fastapi uvicorn websockets wsproto telethon psycopg2-binary gender-guesser name-dataset
 ```
 
 ### 2. **Configure environment**

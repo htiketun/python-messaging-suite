@@ -1,0 +1,44 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+*.log
+
+# VS Code
+.vscode/
+.history/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.env
+
+# Sessions, saved messages, and other runtime data
+sessions/
+saved_messages/
+todo_list/
+
+# Migrations cache
+api/migrations/__pycache__/
+api/models/__pycache__/
+api/serializers/__pycache__/
+api/views/__pycache__/
+python-messaging-suite/__pycache__/
+telegram_sync/__pycache__/
+
+# Compiled files
+*.so
+
+# FastAPI/Uvicorn logs
+*.log
+
+# Bat and shell scripts (optional, if you don't want to track them)
+run.bat
+run.sh

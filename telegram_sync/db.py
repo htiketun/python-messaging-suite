@@ -7,20 +7,24 @@ async def get_db():
     conn = await asyncpg.connect(dsn=config.POSTGRES_DSN)
     return conn
 
-async def upsert_chat(conn, telegram_account_id, chat):
+async def upsert_chat(conn, telegram_account_id, chat, base64_str=None):
     logging.info(f"Upserting chat for account {telegram_account_id}: {chat.name}")
     await conn.execute(
         """
-        INSERT INTO telegram_chats (id, telegram_account_id, name, type, username)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO telegram_chats (id, telegram_account_id, name, type, username, unread_count, photo, last_message_id, last_message_time)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         ON CONFLICT (id, telegram_account_id)
-        DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, username = EXCLUDED.username
+        DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, username = EXCLUDED.username, unread_count = EXCLUDED.unread_count, photo = EXCLUDED.photo, last_message_id = EXCLUDED.last_message_id, last_message_time = EXCLUDED.last_message_time
         """,
         chat.id,
         telegram_account_id,
         chat.name,
         "channel" if chat.is_channel else "group" if chat.is_group else "private" if chat.is_user else "bot" if chat.is_bot else "unknown",
-        getattr(chat.entity, "username", None)
+        getattr(chat.entity, "username", None),
+        chat.unread_count,
+        base64_str,
+        getattr(chat.message, "id", None),
+        getattr(chat.message, "date", None)
     )
     # No need to commit with asyncpg; it auto-commits unless in a transaction
 
@@ -33,25 +37,29 @@ async def get_telegram_account_id(conn, session_file):
     )
     return result['id'] if result else None 
 
-async def upsert_telegram_account(conn, session_file, me):
+async def upsert_telegram_account(conn, session_file, me, counts=0, base64_str=None):
     logging.info(f"Upserting account for session {session_file}: {me.username}")
     logging.debug(f"Account details: {me}")
     await conn.execute(
         """
-        INSERT INTO telegram_accounts (id, session_file, phone, username, first_name, photo)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO telegram_accounts (id, session_file, phone, username, first_name, last_name, photo, unread_count)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         ON CONFLICT (phone) DO UPDATE SET
             session_file = EXCLUDED.session_file,
             username = EXCLUDED.username,
             first_name = EXCLUDED.first_name,
-            photo = EXCLUDED.photo
+            last_name = EXCLUDED.last_name,
+            photo = EXCLUDED.photo,
+            unread_count = EXCLUDED.unread_count
         """,
         me.id,
         os.path.basename(session_file),
         me.phone,
         me.username,
         me.first_name,
-        (me.photo and str(me.photo)) or None
+        me.last_name,
+        base64_str,
+        counts,
     )
 
 async def get_chat_ids_from_telegram_chat(conn, telegram_account_id):

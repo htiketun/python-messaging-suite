@@ -14,6 +14,8 @@ class TelegramChat(models.Model):
     gender = models.CharField(max_length=10, blank=True, null=True)
     is_favorite = models.BooleanField(default=False, null=True)
     is_active = models.BooleanField(default=True, null=True)
+    unread_count = models.IntegerField(default=0)
+    last_seen = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         unique_together = ('id', 'telegram_account_id')

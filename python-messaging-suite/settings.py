@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
     'api',
 ]
@@ -46,12 +47,24 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Allow your frontend’s origin
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:7777",  # React dev server
+    "https://your-frontend-domain.com",
+]
+
+# If you need to allow credentials (cookies, authorization headers):
+CORS_ALLOW_CREDENTIALS = True
+
+APPEND_SLASH = False
 
 ROOT_URLCONF = 'python-messaging-suite.urls'
 

@@ -66,5 +66,5 @@ class GetSyncedToDoList(APIView):
             with open(file_path, 'r', encoding='utf-8') as f:
                 todos = json.load(f)
         else:
-            todos = []
+            todos = ""
         return Response({"todos": todos, "message": "Fetched synced to-do list successfully"}, status=status.HTTP_200_OK)
