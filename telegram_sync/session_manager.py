@@ -28,6 +28,20 @@ def session_path(username):
     os.makedirs(config.SESSION_FOLDER, exist_ok=True)
     return os.path.join(config.SESSION_FOLDER, f"{username}.session")
 
+def load_session(username):
+    """
+    Loads and returns a TelegramClient session for the given username.
+    If the session file does not exist, raises a FileNotFoundError.
+    """
+    path = session_path(username)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Session file for {username} does not exist.")
+    return TelegramClient(
+        path,
+        config.TELEGRAM_API_ID,
+        config.TELEGRAM_API_HASH
+    )
+
 def new_session(username):
     """
     Creates and returns a new TelegramClient session for the given username.
