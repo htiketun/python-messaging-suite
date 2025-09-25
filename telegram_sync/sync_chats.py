@@ -61,15 +61,26 @@ import random
 
 client = OpenAI(api_key="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")
 def predict_gender_age(name, bio, dob):
-    prompt = (
-        f"Given the following information:\n"
-        f"Name: {name}\n"
-        f"Bio: {bio}\n"
-        f"Date of Birth: {dob}\n"
-        "Predict the most likely gender (male or female) and an age range (like '20-30', '30-40', etc). "
-        "Respond ONLY with a valid JSON object like this: {\"gender\": \"male\", \"age\": \"20-30\"} and nothing else. "
-        "If you are unsure, make your best guess."
-    )
+    if dob:
+        prompt = (
+            f"Given the following information:\n"
+            f"Name: {name}\n"
+            f"Bio: {bio}\n"
+            f"Date of Birth: {dob}\n"
+            "Predict the most likely gender (male or female) and the exact age (not a range) based on the date of birth. "
+            "Respond ONLY with a valid JSON object like this: {\"gender\": \"male\", \"age\": \"32\"} and nothing else. "
+            "If you are unsure, make your best guess."
+        )
+    else:
+        prompt = (
+            f"Given the following information:\n"
+            f"Name: {name}\n"
+            f"Bio: {bio}\n"
+            f"Date of Birth: {dob}\n"
+            "Predict the most likely gender (male or female) and an age range e.g. '18-25', '25-35', '35-45', '45-55', '55-65', '65+'. "
+            "Respond ONLY with a valid JSON object like this: {\"gender\": \"male\", \"age\": \"20-30\"} and nothing else. "
+            "If you are unsure, make your best guess."
+        )
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
