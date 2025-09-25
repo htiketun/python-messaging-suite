@@ -16,23 +16,20 @@ class TelegramAccountListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = None  # No serializer needed for listing accounts
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         accounts = TelegramAccount.objects.all().values('id', 'session_file', 'phone', 'username', 'first_name', 'last_name', 'photo', 'unread_count', 'is_active', 'last_seen')
         return Response(list(accounts), status=status.HTTP_200_OK)
 class TelegramChatListView(generics.ListAPIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = TelegramChatSerializer
 
-    def get_queryset(self): 
-        telegram_account_id = self.request.query_params.get('telegram_account_id')
+    def post(self, request):
+        telegram_account_id = request.data.get('telegram_account_id')
         if not telegram_account_id:
-            return TelegramChat.objects.none()
-        return TelegramChat.objects.filter(
+            return Response([], status=status.HTTP_200_OK)
+        queryset = TelegramChat.objects.filter(
             telegram_account_id=telegram_account_id
         ).order_by('-last_message_id')
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
 
@@ -57,7 +54,7 @@ class TelegramChatDetailView(generics.RetrieveAPIView):
     serializer_class = TelegramChatSerializer
     lookup_field = 'id'
 
-    def get_object(self):
+    def post(self):
         chat_id = self.kwargs.get(self.lookup_field)
         try:
             return TelegramChat.objects.get(id=chat_id)
@@ -91,20 +88,21 @@ class TelegramChatMessagesView(generics.ListAPIView):
     serializer_class = TelegramMessageSerializer
     pagination_class = TelegramMessagePagination
 
-    def get_queryset(self):
-        chat_id = self.kwargs['id']
-        return TelegramMessage.objects.filter(chat_id=chat_id).order_by('date')
+    def post(self, request, id):
+        queryset = TelegramMessage.objects.filter(chat_id=id).order_by('date')
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class SendMessageView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def post(self, request, id):
         text = request.data.get('text')
-        telegram_account_id = int(request.data.get('telegram_account_id'))
-        if not text:
-            return Response({"error": "Text is required."}, status=status.HTTP_400_BAD_REQUEST)
-
-        telegram_account = get_object_or_404(TelegramAccount, id=telegram_account_id)
-        session_file = os.path.join(config.SESSION_FOLDER, telegram_account.session_file)
+        session_file = request.data.get('session_file')
+        session_file = os.path.join(config.SESSION_FOLDER, session_file)
         api_id = config.TELEGRAM_API_ID
         api_hash = config.TELEGRAM_API_HASH
 

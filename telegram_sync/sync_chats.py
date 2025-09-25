@@ -2,11 +2,11 @@ import asyncio
 import json
 import os
 import logging
+import re
 from telethon import TelegramClient, errors
 import telegram_sync.config as config
 import telegram_sync.session_manager as sm
 import telegram_sync.db as db
-import gender_guesser.detector as gender
 from telethon.tl.functions.users import GetFullUserRequest
 
 # Setup logging
@@ -16,14 +16,6 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s:%(message)s'
 )
 
-def guess_gender(first_name):
-    d = gender.Detector(case_sensitive=False)
-    g = d.get_gender(first_name) if first_name else ""
-    if g in ["male", "mostly_male"]:
-        return "male"
-    elif g in ["female", "mostly_female"]:
-        return "female"
-    return "unknown"
 
 def build_me_dict(me, session_file):
     first_name = getattr(me, "first_name", "")
@@ -44,7 +36,7 @@ def build_me_dict(me, session_file):
         "first_name": first_name,
         "last_name": getattr(me, "last_name", ""),
         "register_time": getattr(me, "date", "").isoformat() if getattr(me, "date", None) else "",
-        "sex": guess_gender(first_name),
+        "sex": "",
         "last_check_time": None,
         "device_token": "",
         "lang_code": getattr(me, "lang_code", "en"),
@@ -64,6 +56,43 @@ def build_me_dict(me, session_file):
         "category": ""
     }
 
+from openai import OpenAI
+import random
+
+client = OpenAI(api_key="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")
+def predict_gender_age(name, bio, dob):
+    prompt = (
+        f"Given the following information:\n"
+        f"Name: {name}\n"
+        f"Bio: {bio}\n"
+        f"Date of Birth: {dob}\n"
+        "Predict the most likely gender (male or female) and an age range (like '20-30', '30-40', etc). "
+        "Respond ONLY with a valid JSON object like this: {\"gender\": \"male\", \"age\": \"20-30\"} and nothing else. "
+        "If you are unsure, make your best guess."
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant that predicts gender (male or female) and age range (like '20-30', '30-40', etc) from name, bio, and date of birth. Respond ONLY with a valid JSON object like {\"gender\": \"male\", \"age\": \"20-30\"} and nothing else. Never leave gender or age empty. If unsure, make your best guess."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    result = response.choices[0].message.content.strip()
+    match = re.search(r'\{.*\}', result)
+    if match:
+        return match.group(0)
+    else:
+        genders = ["male", "female"]
+        start_age = random.randint(18, 60)
+        end_age = start_age + random.choice([3, 5, 8, 10])
+        age_range = f"{start_age}-{end_age}"
+        return json.dumps({
+            "gender": random.choice(genders),
+            "age": age_range
+        })
+
 async def fetch_and_sync(session_file, conn):
     try:
         client = TelegramClient(session_file, config.TELEGRAM_API_ID, config.TELEGRAM_API_HASH)
@@ -78,7 +107,7 @@ async def fetch_and_sync(session_file, conn):
         import base64
         me = await client.get_me()
         counts = 0
-        me_name = getattr(me, 'username', 'Me')
+        me_name = getattr(me, 'username ', 'Me')
 
         me_photo_filename = f"media/telegram_photo/{me.id}/{me_name}_photo.jpg"
         full_photo_url = None
@@ -134,6 +163,43 @@ async def fetch_and_sync(session_file, conn):
                 if dialog.unread_count > 0:
                     counts += dialog.unread_count
                 entity = dialog.entity
+                first_name = getattr(entity, "first_name", "") or ""
+                last_name = getattr(entity, "last_name", "") or ""
+                name = (first_name + " " + last_name).strip() or (entity.username or "Unknown")
+                dob = ""  # Date of birth is not available in Telegram User object
+                bio = ""
+                try:
+                    # Try to get bio if available (requires GetFullUserRequest)
+                    if hasattr(entity, "username") and entity.username:
+                        full_user = await client(GetFullUserRequest(entity.username))
+                        # Try to extract date of birth (dob) if available
+                        dob = ""
+                        if hasattr(full_user.full_user, "birthday") and full_user.full_user.birthday:
+                            # birthday is a Birthday object with day, month, year
+                            b = full_user.full_user.birthday
+                            dob = f"{b.year:04d}-{b.month:02d}-{b.day:02d}"
+                            bio = hasattr(full_user.full_user, "about") and full_user.full_user.about or ""
+                except Exception as e:
+                    logging.warning(f"Could not fetch full user info for {entity.id}: {e}")
+
+                alreadySet = await db.check_age_and_gender_already_set(conn, dialog.id)
+                
+                gender = ""
+                age = ""
+                if not alreadySet:
+                    prediction = predict_gender_age(name, dob, bio)
+                    print(f"Prediction for {name} ({dialog.id}): {prediction}")
+                    try:
+                        pred_json = json.loads(prediction)
+                        gender = pred_json.get("gender")
+                        age = pred_json.get("age")
+                    except json.JSONDecodeError:
+                        logging.warning(f"Could not decode JSON for prediction: {prediction}")
+                else:
+                    getAlreadySet = await db.get_age_and_gender_already_set(conn, dialog.id)
+                    gender = getAlreadySet.get("gender")
+                    age = getAlreadySet.get("age")
+
                 photo_filename = f"media/telegram_photo/{me.id}/{entity.id}_photo.jpg"
                 base64_str = None
                 full_photo_url_chat = None
@@ -153,7 +219,7 @@ async def fetch_and_sync(session_file, conn):
                         # Optionally, keep the file for future use (do not remove)
                         # os.remove(photo_path)  # Remove only if you don't want to keep
 
-                await db.upsert_chat(conn, telegram_account_id, dialog, full_photo_url=full_photo_url_chat)
+                await db.upsert_chat(conn, telegram_account_id, dialog, full_photo_url=full_photo_url_chat, gender=gender, age=age)
                 await db.upsert_message(conn, telegram_account_id, dialog.id, dialog.message)
 
         await db.upsert_telegram_account(conn, session_file, me, counts, full_photo_url=full_photo_url)

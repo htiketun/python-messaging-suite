@@ -7,14 +7,14 @@ async def get_db():
     conn = await asyncpg.connect(dsn=config.POSTGRES_DSN)
     return conn
 
-async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None):
+async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None, gender=None, age=None):
     logging.info(f"Upserting chat for account {telegram_account_id}: {chat.name}")
     await conn.execute(
         """
-        INSERT INTO telegram_chats (id, telegram_account_id, name, type, username, unread_count, photo, last_message_id, last_message_time)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        INSERT INTO telegram_chats (id, telegram_account_id, name, type, username, unread_count, photo, last_message_id, last_message_time, gender, age)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
         ON CONFLICT (id, telegram_account_id)
-        DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, username = EXCLUDED.username, unread_count = EXCLUDED.unread_count, photo = EXCLUDED.photo, last_message_id = EXCLUDED.last_message_id, last_message_time = EXCLUDED.last_message_time
+        DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, username = EXCLUDED.username, unread_count = EXCLUDED.unread_count, photo = EXCLUDED.photo, last_message_id = EXCLUDED.last_message_id, last_message_time = EXCLUDED.last_message_time, gender = EXCLUDED.gender, age = EXCLUDED.age
         """,
         chat.id,
         telegram_account_id,
@@ -24,7 +24,9 @@ async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None):
         chat.unread_count,
         full_photo_url,
         getattr(chat.message, "id", None),
-        getattr(chat.message, "date", None)
+        getattr(chat.message, "date", None),
+        str(gender) if gender is not None else None,
+        str(age) if age is not None else None,
     )
     # No need to commit with asyncpg; it auto-commits unless in a transaction
 
@@ -59,6 +61,24 @@ async def upsert_telegram_account(conn, session_file, me, counts=0, full_photo_u
         full_photo_url,
         counts,
     )
+
+async def check_age_and_gender_already_set(conn, telegram_account_id):
+    result = await conn.fetchrow(
+        """
+        SELECT * FROM telegram_chats WHERE id = $1 AND age IS NOT NULL AND gender IS NOT NULL
+        """,
+        telegram_account_id
+    )
+    return result is not None
+
+async def get_age_and_gender_already_set(conn, telegram_account_id):
+    result = await conn.fetchrow(
+        """
+        SELECT age, gender FROM telegram_chats WHERE id = $1 AND age IS NOT NULL AND gender IS NOT NULL
+        """,
+        telegram_account_id
+    )
+    return result if result else None
 
 async def get_chat_ids_from_telegram_chat(conn, telegram_account_id):
     result = await conn.fetch(

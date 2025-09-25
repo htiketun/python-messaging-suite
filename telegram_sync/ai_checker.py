@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="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")
 
 name = "妮赖"
 bio = "A passionate software developer from Shanghai."

@@ -58,6 +58,9 @@ def check_telegram_users(usernames):
         for username in usernames:
             try:
                 user = client.get_entity(username)
+                full_user = client(GetFullUserRequest(user))
+                print(full_user.full_user.birthday)
+                exit()
             except UsernameNotOccupiedError:
                 print(f"Username @{username} does not exist.")
                 continue

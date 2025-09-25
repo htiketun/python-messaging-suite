@@ -18,6 +18,7 @@ async def websocket_sync_chats(ws: WebSocket):
     await ws.accept()
     try:
         data = await ws.receive_json()
+        type = data.get("type")
         session_file = data.get("session_file")
         session_files = [session_file] if session_file else None
         session_files = sm.get_session_files(session_files)
@@ -25,7 +26,7 @@ async def websocket_sync_chats(ws: WebSocket):
 
         while True:
             await sync_chats.main(session_files=session_files)
-            await ws.send_json({"status": "success", "message": "Chats synced successfully"})
+            await ws.send_json({"status": type, "message": "Chats synced successfully"})
             await asyncio.sleep(2)  # Wait 2 seconds before next sync
 
     except WebSocketDisconnect:
@@ -46,6 +47,7 @@ async def websocket_sync_messages(ws: WebSocket):
     await ws.accept()
     try:
         data = await ws.receive_json()
+        type = data.get("type")
         session_file = data.get("session_file")
         chat_id = data.get("chat_id")
         direction = data.get("direction", "new")
@@ -56,13 +58,12 @@ async def websocket_sync_messages(ws: WebSocket):
 
         while True:
             await sync_messages.main(
-                full_sync=False,
                 session_files=session_files,
                 chat_id=chat_id,
                 direction=direction,
                 limit=limit
             )
-            await ws.send_json({"status": "success", "message": "Messages synced successfully"})
+            await ws.send_json({"status": type, "message": "Messages synced successfully"})
             await asyncio.sleep(2)  # Wait 2 seconds before next sync
 
     except WebSocketDisconnect:
@@ -78,6 +79,10 @@ async def websocket_sync_messages(ws: WebSocket):
             await ws.close()
         except Exception:
             pass
+
+
+{"session_file":"session_909aed7e.session","chat_id":7127517690,"direction":"new","limit":10,"type":"messageSync"}
+
 
 # Connect to ws://localhost:8000/ws/telegram-chats/ (as a WebSocket client)
 # Send: {"session_file": "path/to/session.session"} (or {} for all)
