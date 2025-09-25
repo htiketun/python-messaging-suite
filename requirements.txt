@@ -1,0 +1,10 @@
+django 
+djangorestframework 
+django-cors-headers 
+djangorestframework-simplejwt 
+fastapi 
+uvicorn 
+websockets 
+wsproto 
+telethon 
+psycopg2-binary
