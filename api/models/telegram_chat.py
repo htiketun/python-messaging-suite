@@ -12,6 +12,7 @@ class TelegramChat(models.Model):
     last_message_time = models.DateTimeField(null=True, blank=True)
     photo = models.TextField(null=True, blank=True)
     gender = models.CharField(max_length=10, blank=True, null=True)
+    age = models.CharField(max_length=10, blank=True, null=True)
     is_favorite = models.BooleanField(default=False, null=True)
     is_active = models.BooleanField(default=True, null=True)
     unread_count = models.IntegerField(default=0)

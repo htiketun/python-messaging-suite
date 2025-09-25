@@ -3,15 +3,25 @@ from openai import OpenAI
 client = OpenAI(api_key="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")
 
 name = "妮赖"
+bio = "A passionate software developer from Shanghai."
+dob = "1995-08-15"
+
+prompt = (
+    f"Given the following information:\n"
+    f"Name: {name}\n"
+    f"Bio: {bio}\n"
+    f"Date of Birth: {dob}\n"
+    "Predict the most likely gender and age (in years). "
+    "Respond in JSON format: {\"gender\": \"male/female/other\", \"age\": eg; 20 - 30}"
+)
 
 response = client.chat.completions.create(
     model="gpt-4o-mini",
     messages=[
-        {"role": "system", "content": "You are a helpful assistant that accurately classifies names by likely gender. "},
-        {"role": "user", "content": f"What is the gender of the name '{name}'?"},
-        {"role": "assistant", "content": "Respond with only one word: 'male', 'female'likely to be."}
+        {"role": "system", "content": "You are a helpful assistant that predicts gender and age from name, bio, and date of birth."},
+        {"role": "user", "content": prompt}
     ]
 )
 
-gender = response.choices[0].message.content.strip().lower()
-print(gender)
+result = response.choices[0].message.content.strip()
+print(result)

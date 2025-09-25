@@ -7,7 +7,7 @@ async def get_db():
     conn = await asyncpg.connect(dsn=config.POSTGRES_DSN)
     return conn
 
-async def upsert_chat(conn, telegram_account_id, chat, base64_str=None):
+async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None):
     logging.info(f"Upserting chat for account {telegram_account_id}: {chat.name}")
     await conn.execute(
         """
@@ -22,7 +22,7 @@ async def upsert_chat(conn, telegram_account_id, chat, base64_str=None):
         "channel" if chat.is_channel else "group" if chat.is_group else "private" if chat.is_user else "bot" if chat.is_bot else "unknown",
         getattr(chat.entity, "username", None),
         chat.unread_count,
-        base64_str,
+        full_photo_url,
         getattr(chat.message, "id", None),
         getattr(chat.message, "date", None)
     )
@@ -37,9 +37,7 @@ async def get_telegram_account_id(conn, session_file):
     )
     return result['id'] if result else None 
 
-async def upsert_telegram_account(conn, session_file, me, counts=0, base64_str=None):
-    logging.info(f"Upserting account for session {session_file}: {me.username}")
-    logging.debug(f"Account details: {me}")
+async def upsert_telegram_account(conn, session_file, me, counts=0, full_photo_url=None):
     await conn.execute(
         """
         INSERT INTO telegram_accounts (id, session_file, phone, username, first_name, last_name, photo, unread_count)
@@ -58,7 +56,7 @@ async def upsert_telegram_account(conn, session_file, me, counts=0, base64_str=N
         me.username,
         me.first_name,
         me.last_name,
-        base64_str,
+        full_photo_url,
         counts,
     )
 
