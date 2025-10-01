@@ -1,6 +1,9 @@
 from django.db import models
+from django.conf import settings
+
 class TelegramAccount(models.Model):
     id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     session_file = models.CharField(max_length=100, db_index=True)
     phone = models.CharField(max_length=20, blank=True, null=True, db_index=True, unique=True)
     username = models.CharField(max_length=150, blank=True, null=True, db_index=True)

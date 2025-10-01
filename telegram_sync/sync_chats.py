@@ -229,8 +229,31 @@ async def fetch_and_sync(session_file, conn):
                         #     base64_str = base64.b64encode(image_file.read()).decode("utf-8")
                         # Optionally, keep the file for future use (do not remove)
                         # os.remove(photo_path)  # Remove only if you don't want to keep
+                
+                # i want to get last seen online status
+                last_seen = None
+                if dialog.message and hasattr(dialog.message, "date") and dialog.message.date:
+                    last_seen = dialog.message.date.isoformat()
 
-                await db.upsert_chat(conn, telegram_account_id, dialog, full_photo_url=full_photo_url_chat, gender=gender, age=age)
+                # logging.info(f"Username {entity.username} User status: {entity.status}")
+                # # Extract last seen/online status from entity.status if available
+                # if hasattr(entity, "status") and entity.status:
+                #     status = entity.status
+                #     if status.__class__.__name__ == "UserStatusLastWeek":
+                #         last_seen = "last_week"
+                #     elif status.__class__.__name__ == "UserStatusOnline":
+                #         last_seen = status.was_online.isoformat()
+                #     # UserStatusRecently, UserStatusLastMonth, UserStatusLastWeek, etc.
+                #     elif status.__class__.__name__ == "UserStatusLastMonth":
+                #         last_seen = "last_month"
+                #     elif status.__class__.__name__ == "UserStatusOffline":
+                #         last_seen = "offline"
+                #     elif status.__class__.__name__ == "UserStatusRecently":
+                #         last_seen = 
+                #     elif status.__class__.__name__ == "UserStatusEmpty":
+                #         last_seen = None
+
+                await db.upsert_chat(conn, telegram_account_id, dialog, full_photo_url=full_photo_url_chat, gender=gender, age=age, last_seen=last_seen)
                 await db.upsert_message(conn, telegram_account_id, dialog.id, dialog.message)
 
         await db.upsert_telegram_account(conn, session_file, me, counts, full_photo_url=full_photo_url)

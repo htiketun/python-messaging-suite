@@ -89,7 +89,7 @@ class TelegramChatMessagesView(generics.ListAPIView):
     pagination_class = TelegramMessagePagination
 
     def post(self, request, id):
-        queryset = TelegramMessage.objects.filter(chat_id=id).order_by('date')
+        queryset = TelegramMessage.objects.filter(chat_id=id).order_by('-date')
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)

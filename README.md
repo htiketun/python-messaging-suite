@@ -197,3 +197,6 @@ MIT
 -   [Telethon](https://docs.telethon.dev/)
 -   [gender-guesser](https://pypi.org/project/gender-guesser/)
 -   [transformers](https://huggingface.co/docs/transformers/index)
+
+
+ <!-- python -m telegram_sync.sync_messages --direction=old -->

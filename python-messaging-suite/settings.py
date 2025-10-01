@@ -158,3 +158,8 @@ REST_FRAMEWORK = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Telegram API Configuration
+TELEGRAM_API_ID = os.environ.get('TELEGRAM_API_ID', '20724149')
+TELEGRAM_API_HASH = os.environ.get('TELEGRAM_API_HASH', 'd919f276e10b80ab0b5bf4dad0121663')
+TELEGRAM_SESSION_FOLDER = os.path.join(BASE_DIR, 'sessions')

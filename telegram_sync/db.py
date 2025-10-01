@@ -7,14 +7,23 @@ async def get_db():
     conn = await asyncpg.connect(dsn=config.POSTGRES_DSN)
     return conn
 
-async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None, gender=None, age=None):
+async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None, gender=None, age=None, last_seen=None):
     logging.info(f"Upserting chat for account {telegram_account_id}: {chat.name}")
+    import datetime
+
+    # Convert last_seen to datetime if it's a string
+    if isinstance(last_seen, str):
+        try:
+            last_seen = datetime.datetime.fromisoformat(last_seen.replace("Z", "+00:00"))
+        except Exception:
+            last_seen = None
+
     await conn.execute(
         """
-        INSERT INTO telegram_chats (id, telegram_account_id, name, type, username, unread_count, photo, last_message_id, last_message_time, gender, age)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        INSERT INTO telegram_chats (id, telegram_account_id, name, type, username, unread_count, photo, last_message_id, last_message_time, gender, age, last_seen)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
         ON CONFLICT (id, telegram_account_id)
-        DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, username = EXCLUDED.username, unread_count = EXCLUDED.unread_count, photo = EXCLUDED.photo, last_message_id = EXCLUDED.last_message_id, last_message_time = EXCLUDED.last_message_time, gender = EXCLUDED.gender, age = EXCLUDED.age
+        DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, username = EXCLUDED.username, unread_count = EXCLUDED.unread_count, photo = EXCLUDED.photo, last_message_id = EXCLUDED.last_message_id, last_message_time = EXCLUDED.last_message_time, gender = EXCLUDED.gender, age = EXCLUDED.age, last_seen = EXCLUDED.last_seen
         """,
         chat.id,
         telegram_account_id,
@@ -27,6 +36,7 @@ async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None, gend
         getattr(chat.message, "date", None),
         str(gender) if gender is not None else None,
         str(age) if age is not None else None,
+        last_seen
     )
     # No need to commit with asyncpg; it auto-commits unless in a transaction
 

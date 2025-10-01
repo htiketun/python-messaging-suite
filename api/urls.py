@@ -20,6 +20,14 @@ from api.views.telegram_chat import (
     TelegramChatMessagesView,
     SendMessageView,
 )
+from api.views.telegram_auth import (
+    StartLoginView,
+    CheckLoginView,
+    SubmitPhoneView,
+    SubmitCodeView,
+    SubmitPasswordView,
+    SubmitSignupView,
+)
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -41,4 +49,12 @@ urlpatterns = [
     path('chats/<str:id>/messages/', TelegramChatMessagesView.as_view(), name='chat-messages'),
     path('chats/<str:id>/send/', SendMessageView.as_view(), name='chat-send-message'),
     path('sanctum/csrf-cookie/', csrf_cookie),  # Dummy endpoint for CSRF cookie
+
+    # Telegram Authentication endpoints
+    path('auth/telegram/start-login/', StartLoginView.as_view(), name='telegram-start-login'),
+    path('auth/telegram/check-login/', CheckLoginView.as_view(), name='telegram-check-login'),
+    path('auth/telegram/submit-phone/', SubmitPhoneView.as_view(), name='telegram-submit-phone'),
+    path('auth/telegram/submit-code/', SubmitCodeView.as_view(), name='telegram-submit-code'),
+    path('auth/telegram/submit-password/', SubmitPasswordView.as_view(), name='telegram-submit-password'),
+    path('auth/telegram/submit-signup/', SubmitSignupView.as_view(), name='telegram-submit-signup'),
 ]

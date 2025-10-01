@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Telegram Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .primary { background-color: #007bff; color: white; }
+        .secondary { background-color: #6c757d; color: white; }
+        .success { background-color: #28a745; color: white; }
+        .danger { background-color: #dc3545; color: white; }
+        .messages {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #fafafa;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            background: white;
+            border-radius: 4px;
+        }
+        .message.new { border-left-color: #28a745; }
+        .message.edited { border-left-color: #ffc107; }
+        .message.error { border-left-color: #dc3545; }
+        .message-header {
+            font-weight: bold;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .message-content {
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .monitoring-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Real-time Telegram Messages</h1>
+        
+        <div id="status" class="status disconnected">
+            Disconnected
+        </div>
+        
+        <div class="controls">
+            <button id="connectBtn" class="primary" onclick="connect()">Connect</button>
+            <button id="disconnectBtn" class="secondary" onclick="disconnect()">Disconnect</button>
+            <button class="secondary" onclick="ping()">Ping</button>
+            <button class="secondary" onclick="getStatus()">Get Status</button>
+            <button class="danger" onclick="clearMessages()">Clear Messages</button>
+        </div>
+        
+        <div class="monitoring-form">
+            <h3>Monitoring Controls</h3>
+            <div>
+                <input type="text" id="sessionFile" placeholder="Session file path" style="width: 300px;">
+                <input type="text" id="chatIds" placeholder="Chat IDs (comma-separated, optional)" style="width: 200px;">
+                <button class="success" onclick="startMonitoring()">Start Monitoring</button>
+                <button class="danger" onclick="stopMonitoring()">Stop Monitoring</button>
+            </div>
+        </div>
+        
+        <div class="messages" id="messages">
+            <div class="message">
+                <div class="message-header">System</div>
+                <div class="message-content">Ready to connect to WebSocket...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let isConnected = false;
+
+        function updateStatus(status, isConnected) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = status;
+            statusEl.className = 'status ' + (isConnected ? 'connected' : 'disconnected');
+        }
+
+        function addMessage(type, content, sender = null, chat = null) {
+            const messagesEl = document.getElementById('messages');
+            const messageEl = document.createElement('div');
+            messageEl.className = 'message ' + type;
+            
+            let header = type.charAt(0).toUpperCase() + type.slice(1);
+            if (sender && chat) {
+                header += ` from ${sender.first_name || sender.username || sender.id} in ${chat.title || chat.username || chat.id}`;
+            }
+            
+            messageEl.innerHTML = `
+                <div class="message-header">${header} - ${new Date().toLocaleTimeString()}</div>
+                <div class="message-content">${JSON.stringify(content, null, 2)}</div>
+            `;
+            
+            messagesEl.appendChild(messageEl);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function connect() {
+            if (ws) {
+                ws.close();
+            }
+
+            updateStatus('Connecting...', false);
+            ws = new WebSocket('ws://localhost:8000/ws/messages');
+
+            ws.onopen = function(event) {
+                isConnected = true;
+                updateStatus('Connected', true);
+                addMessage('system', 'WebSocket connection established');
+            };
+
+            ws.onmessage = function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    console.log('Received:', data);
+                    
+                    if (data.type === 'new_message') {
+                        addMessage('new', {
+                            message_id: data.message_id,
+                            text: data.text,
+                            date: data.date
+                        }, data.sender, data.chat);
+                    } else if (data.type === 'message_edited') {
+                        addMessage('edited', {
+                            message_id: data.message_id,
+                            text: data.text,
+                            date: data.date
+                        }, data.sender);
+                    } else {
+                        addMessage(data.type || 'system', data);
+                    }
+                } catch (e) {
+                    addMessage('error', 'Failed to parse message: ' + event.data);
+                }
+            };
+
+            ws.onclose = function(event) {
+                isConnected = false;
+                updateStatus('Disconnected', false);
+                addMessage('system', 'WebSocket connection closed');
+            };
+
+            ws.onerror = function(error) {
+                addMessage('error', 'WebSocket error: ' + error);
+            };
+        }
+
+        function disconnect() {
+            if (ws) {
+                ws.close();
+                ws = null;
+            }
+        }
+
+        function ping() {
+            if (ws && isConnected) {
+                ws.send(JSON.stringify({ type: 'ping' }));
+                addMessage('system', 'Ping sent');
+            }
+        }
+
+        function getStatus() {
+            if (ws && isConnected) {
+                ws.send(JSON.stringify({ type: 'get_status' }));
+                addMessage('system', 'Status request sent');
+            }
+        }
+
+        function clearMessages() {
+            const messagesEl = document.getElementById('messages');
+            messagesEl.innerHTML = '';
+        }
+
+        async function startMonitoring() {
+            const sessionFile = document.getElementById('sessionFile').value;
+            const chatIds = document.getElementById('chatIds').value;
+            
+            if (!sessionFile) {
+                alert('Please enter session file path');
+                return;
+            }
+
+            const payload = {
+                session_file: sessionFile
+            };
+
+            if (chatIds) {
+                payload.chat_ids = chatIds.split(',').map(id => parseInt(id.trim()));
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/realtime/start-monitoring/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                addMessage('system', 'Start monitoring response: ' + JSON.stringify(result, null, 2));
+            } catch (error) {
+                addMessage('error', 'Failed to start monitoring: ' + error);
+            }
+        }
+
+        async function stopMonitoring() {
+            const sessionFile = document.getElementById('sessionFile').value;
+            
+            if (!sessionFile) {
+                alert('Please enter session file path');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/realtime/stop-monitoring/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ session_file: sessionFile })
+                });
+
+                const result = await response.json();
+                addMessage('system', 'Stop monitoring response: ' + JSON.stringify(result, null, 2));
+            } catch (error) {
+                addMessage('error', 'Failed to stop monitoring: ' + error);
+            }
+        }
+
+        // Auto-connect on page load
+        window.onload = function() {
+            // Uncomment to auto-connect:
+            // connect();
+        };
+    </script>
+</body>
+</html>
