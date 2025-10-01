@@ -117,7 +117,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('chat_id', models.BigIntegerField(db_index=True)),
                 ('telegram_account_id', models.BigIntegerField(db_index=True)),
-                ('last_message_id', models.BigIntegerField(db_index=True)),
+                ('last_message_id', models.BigIntegerField(blank=True, null=True)),
                 ('oldest_message_id', models.BigIntegerField(blank=True, null=True)),
             ],
             options={

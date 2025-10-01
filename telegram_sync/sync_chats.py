@@ -8,6 +8,7 @@ import telegram_sync.config as config
 import telegram_sync.session_manager as sm
 import telegram_sync.db as db
 from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import UserStatusEmpty, UserStatusOnline, UserStatusOffline, UserStatusRecently, UserStatusLastWeek, UserStatusLastMonth
 
 # Setup logging
 logging.basicConfig(
@@ -232,26 +233,11 @@ async def fetch_and_sync(session_file, conn):
                 
                 # i want to get last seen online status
                 last_seen = None
-                if dialog.message and hasattr(dialog.message, "date") and dialog.message.date:
-                    last_seen = dialog.message.date.isoformat()
-
-                # logging.info(f"Username {entity.username} User status: {entity.status}")
-                # # Extract last seen/online status from entity.status if available
-                # if hasattr(entity, "status") and entity.status:
-                #     status = entity.status
-                #     if status.__class__.__name__ == "UserStatusLastWeek":
-                #         last_seen = "last_week"
-                #     elif status.__class__.__name__ == "UserStatusOnline":
-                #         last_seen = status.was_online.isoformat()
-                #     # UserStatusRecently, UserStatusLastMonth, UserStatusLastWeek, etc.
-                #     elif status.__class__.__name__ == "UserStatusLastMonth":
-                #         last_seen = "last_month"
-                #     elif status.__class__.__name__ == "UserStatusOffline":
-                #         last_seen = "offline"
-                #     elif status.__class__.__name__ == "UserStatusRecently":
-                #         last_seen = 
-                #     elif status.__class__.__name__ == "UserStatusEmpty":
-                #         last_seen = None
+          
+                # Extract last seen/online status from entity.status if available
+                if hasattr(entity, "status") and entity.status:
+                    status = entity.status
+                    last_seen = get_user_status(status)
 
                 await db.upsert_chat(conn, telegram_account_id, dialog, full_photo_url=full_photo_url_chat, gender=gender, age=age, last_seen=last_seen)
                 await db.upsert_message(conn, telegram_account_id, dialog.id, dialog.message)
@@ -275,6 +261,27 @@ async def fetch_and_sync(session_file, conn):
         print(msg)
         logging.error(msg)
 
+from datetime import datetime, timedelta, timezone
+
+def get_user_status(status):
+    if isinstance(status, UserStatusEmpty):
+        return None
+    elif isinstance(status, UserStatusOnline):
+        return datetime.now(timezone.utc).isoformat()
+    elif isinstance(status, UserStatusOffline):
+        return status.was_online.isoformat()
+    elif isinstance(status, UserStatusRecently):
+        # Approximate "recently" as 5 minutes ago
+        return (datetime.now(timezone.utc) - timedelta(minutes=5)).isoformat()
+    elif isinstance(status, UserStatusLastWeek):
+        # Approximate "last week" as 3 days ago
+        return (datetime.now(timezone.utc) - timedelta(days=3)).isoformat()
+    elif isinstance(status, UserStatusLastMonth):
+        # Approximate "last month" as 15 days ago
+        return (datetime.now(timezone.utc) - timedelta(days=15)).isoformat()
+    else:
+        return None
+    
 async def main(session_files=None):
     # logging.info("Started sync_chats.py")
     if session_files is None:
