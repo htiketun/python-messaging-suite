@@ -302,13 +302,13 @@ class RealtimeChatListService:
             elif hasattr(status, '__class__'):
                 status_name = status.__class__.__name__
                 if 'Online' in status_name:
-                    return {'type': 'online'}
+                    return {'type': 'online', 'last_seen' : datetime.now(timezone.utc).isoformat()}
                 elif 'Recently' in status_name:
-                    return {'type': 'recently'}
+                    return {'type': 'recently', 'last_seen' : (datetime.now(timezone.utc) - timedelta(minutes=(random.randint(1, 6)))).isoformat()}
                 elif 'LastWeek' in status_name:
-                    return {'type': 'last_week'}
+                    return {'type': 'last_week', 'last_seen' :  (datetime.now(timezone.utc) - timedelta(days={random.randint(1, 7)})).isoformat()}
                 elif 'LastMonth' in status_name:
-                    return {'type': 'last_month'}
+                    return {'type': 'last_month', 'last_seen' : (datetime.now(timezone.utc) - timedelta(days=random.randint(8, 30))).isoformat()}
             
             return {'type': 'unknown'}
         if isinstance(status, UserStatusEmpty):
@@ -319,7 +319,7 @@ class RealtimeChatListService:
             return status.was_online.isoformat()
         elif isinstance(status, UserStatusRecently):
             # Approximate "recently" as a random time between 1 and 10 minutes ago
-            minutes_ago = random.randint(1, 10)
+            minutes_ago = random.randint(1, 6)
             return (datetime.now(timezone.utc) - timedelta(minutes=minutes_ago)).isoformat()
         elif isinstance(status, UserStatusLastWeek):
             # Approximate "last week" as a random time between 1 and 7 days ago
