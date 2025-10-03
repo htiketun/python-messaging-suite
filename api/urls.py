@@ -58,3 +58,4 @@ urlpatterns = [
     path('auth/telegram/submit-password/', SubmitPasswordView.as_view(), name='telegram-submit-password'),
     path('auth/telegram/submit-signup/', SubmitSignupView.as_view(), name='telegram-submit-signup'),
 ]
+

@@ -2,6 +2,7 @@ from fastapi import WebSocket, WebSocketDisconnect, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
 import logging
+from datetime import datetime
 from telegram_sync.realtime_messages import realtime_service
 
 logger = logging.getLogger(__name__)
@@ -110,6 +111,349 @@ async def remove_chat_from_monitoring(request: RemoveChatRequest):
         logger.error(f"Error removing chat from monitoring: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+async def handle_send_message(websocket: WebSocket, data: dict):
+    """Handle sending a message through WebSocket"""
+    try:
+        # Extract message data
+        chat_id = data.get("chat_id")
+        text = data.get("text")
+        session_file = data.get("session_file")
+        temp_id = data.get("temp_id")
+        
+        if not all([chat_id, session_file]) or not text or not text.strip():
+            await websocket.send_json({
+                "type": "message_send_error",
+                "chat_id": chat_id,
+                "temp_id": temp_id,
+                "error": "Missing required fields: chat_id, text, session_file or empty message"
+            })
+            return
+        
+        # Clean the text
+        text = text.strip()
+        
+        # Import here to avoid circular imports
+        from .realtime_chat_list import chat_list_service
+        
+        # Check if session is active
+        if session_file not in chat_list_service.active_sessions:
+            await websocket.send_json({
+                "type": "message_send_error",
+                "chat_id": chat_id,
+                "temp_id": temp_id,
+                "error": f"Session {session_file} is not active. Start chat monitoring first."
+            })
+            return
+        
+        # Get the Telegram client
+        client = chat_list_service.active_sessions[session_file]
+        
+        # Send the message via Telegram
+        try:
+            logger.info(f"Sending message via Telegram to chat_id={chat_id}, text='{text[:50]}...'")
+            sent_message = await client.send_message(int(chat_id), text)
+            
+            # Store the sent message in database
+            conn = None
+            try:
+                import telegram_sync.db as db
+                conn = await db.get_db()
+                
+                # Get telegram account ID
+                telegram_account_id = await db.get_telegram_account_id(conn, session_file)
+                
+                # Store the sent message in database
+                await db.upsert_message(conn, telegram_account_id, int(chat_id), sent_message)
+                
+                # Update chat's last message information
+                await db.set_last_synced_message(conn, telegram_account_id, int(chat_id), 
+                                                sent_message.id, sent_message.date, newest=True)
+                
+                # Update chat's last message in telegram_chats table
+                await conn.execute(
+                    """
+                    UPDATE telegram_chats 
+                    SET last_message_id = $1, last_message_time = $2
+                    WHERE id = $3 AND telegram_account_id = $4
+                    """,
+                    sent_message.id,
+                    sent_message.date.astimezone(tz=None).replace(tzinfo=None) if sent_message.date and sent_message.date.tzinfo else sent_message.date,
+                    int(chat_id),
+                    telegram_account_id
+                )
+                
+                logger.info(f"Message stored in database: chat_id={chat_id}, message_id={sent_message.id}")
+                
+            except Exception as db_error:
+                logger.error(f"Error storing message in database: {db_error}")
+                # Continue execution even if database storage fails
+            finally:
+                if conn:
+                    try:
+                        await conn.close()
+                    except Exception as close_error:
+                        logger.warning(f"Error closing database connection: {close_error}")
+            
+            # Confirm message was sent successfully to the sender
+            await websocket.send_json({
+                "type": "message_sent",
+                "chat_id": chat_id,
+                "temp_id": temp_id,
+                "message_id": sent_message.id,
+                "text": text,
+                "date": sent_message.date.isoformat() if sent_message.date else None,
+                "success": True
+            })
+            
+            # Broadcast the sent message to all other connected clients (for multi-device sync)
+            me = await client.get_me()
+            await broadcast_new_message({
+                "type": "new_message",
+                "chat_id": chat_id,
+                "message_id": sent_message.id,
+                "text": text,
+                "date": sent_message.date.isoformat() if sent_message.date else None,
+                "sender": {
+                    "id": me.id,
+                    "first_name": getattr(me, 'first_name', ''),
+                    "last_name": getattr(me, 'last_name', ''),
+                    "username": getattr(me, 'username', ''),
+                },
+                "session_file": session_file,
+                "timestamp": datetime.now().isoformat()
+            }, exclude_websocket=websocket)  # Exclude the sender's WebSocket
+            
+            logger.info(f"Message sent successfully via WebSocket: chat_id={chat_id}, message_id={sent_message.id}")
+            
+        except Exception as send_error:
+            logger.error(f"Error sending message via Telegram: {send_error}")
+            await websocket.send_json({
+                "type": "message_send_error",
+                "chat_id": chat_id,
+                "temp_id": temp_id,
+                "error": f"Failed to send message: {str(send_error)}"
+            })
+            
+    except Exception as e:
+        logger.error(f"Error in handle_send_message: {e}")
+        await websocket.send_json({
+            "type": "message_send_error",
+            "chat_id": data.get("chat_id"),
+            "temp_id": data.get("temp_id"),
+            "error": f"Internal error: {str(e)}"
+        })
+
+async def handle_mark_messages_read(websocket: WebSocket, data: dict):
+    """Handle marking all messages in a chat as read"""
+    try:
+        chat_id = data.get("chat_id")
+        session_file = data.get("session_file")
+        
+        if not all([chat_id, session_file]):
+            await websocket.send_json({
+                "type": "read_update_error",
+                "chat_id": chat_id,
+                "error": "Missing required fields: chat_id, session_file"
+            })
+            return
+        
+        # Import here to avoid circular imports
+        from .realtime_chat_list import chat_list_service
+        
+        # Check if session is active
+        if session_file not in chat_list_service.active_sessions:
+            await websocket.send_json({
+                "type": "read_update_error",
+                "chat_id": chat_id,
+                "error": f"Session {session_file} is not active. Start chat monitoring first."
+            })
+            return
+        
+        # Get the Telegram client
+        client = chat_list_service.active_sessions[session_file]
+        try:
+            # Mark all messages as read in Telegram
+            await client.send_read_acknowledge(int(chat_id))
+            
+            # Update database
+            from . import db
+            conn = None
+            try:
+                conn = await db.get_db()
+                telegram_account_id = await db.get_telegram_account_id(conn, session_file)
+                await db.mark_messages_as_read(conn, telegram_account_id, int(chat_id))
+            except Exception as db_error:
+                logger.error(f"Database error marking messages as read: {db_error}")
+            finally:
+                if conn:
+                    await conn.close()
+            
+            # Broadcast read update to all connected clients
+            await broadcast_read_update({
+                "type": "messages_marked_read",
+                "chat_id": chat_id,
+                "session_file": session_file,
+                "timestamp": datetime.now().isoformat()
+            })
+            
+            # Confirm to the requesting client
+            await websocket.send_json({
+                "type": "read_update_success",
+                "chat_id": chat_id,
+                "action": "mark_all_read",
+                "success": True
+            })
+            
+            logger.info(f"Marked all messages as read for chat {chat_id}")
+            
+        except Exception as read_error:
+            logger.error(f"Error marking messages as read: {read_error}")
+            await websocket.send_json({
+                "type": "read_update_error",
+                "chat_id": chat_id,
+                "error": f"Failed to mark messages as read: {str(read_error)}"
+            })
+            
+    except Exception as e:
+        logger.error(f"Error in handle_mark_messages_read: {e}")
+        await websocket.send_json({
+            "type": "read_update_error",
+            "chat_id": data.get("chat_id"),
+            "error": f"Internal error: {str(e)}"
+        })
+
+async def handle_mark_message_read(websocket: WebSocket, data: dict):
+    """Handle marking a specific message as read"""
+    try:
+        chat_id = data.get("chat_id")
+        message_id = data.get("message_id")
+        session_file = data.get("session_file")
+        
+        if not all([chat_id, message_id, session_file]):
+            await websocket.send_json({
+                "type": "read_update_error",
+                "chat_id": chat_id,
+                "message_id": message_id,
+                "error": "Missing required fields: chat_id, message_id, session_file"
+            })
+            return
+        
+        # Import here to avoid circular imports
+        from .realtime_chat_list import chat_list_service
+        
+        # Check if session is active
+        if session_file not in chat_list_service.active_sessions:
+            await websocket.send_json({
+                "type": "read_update_error",
+                "chat_id": chat_id,
+                "message_id": message_id,
+                "error": f"Session {session_file} is not active. Start chat monitoring first."
+            })
+            return
+        
+        # Get the Telegram client
+        client = chat_list_service.active_sessions[session_file]
+        
+        try:
+            # Mark message as read in Telegram (up to this message ID)
+            await client.send_read_acknowledge(int(chat_id), max_id=int(message_id))
+            
+            # Update database
+            from . import db
+            conn = None
+            try:
+                conn = await db.get_db()
+                telegram_account_id = await db.get_telegram_account_id(conn, session_file)
+                await db.mark_message_as_read(conn, telegram_account_id, int(chat_id), int(message_id))
+            except Exception as db_error:
+                logger.error(f"Database error marking message as read: {db_error}")
+            finally:
+                if conn:
+                    await conn.close()
+            
+            # Broadcast read update to all connected clients
+            await broadcast_read_update({
+                "type": "message_read_update",
+                "chat_id": chat_id,
+                "message_id": message_id,
+                "session_file": session_file,
+                "status": "read",
+                "timestamp": datetime.now().isoformat()
+            })
+            
+            # Confirm to the requesting client
+            await websocket.send_json({
+                "type": "read_update_success",
+                "chat_id": chat_id,
+                "message_id": message_id,
+                "action": "mark_message_read",
+                "success": True
+            })
+            
+            logger.info(f"Marked message {message_id} as read in chat {chat_id}")
+            
+        except Exception as read_error:
+            logger.error(f"Error marking message as read: {read_error}")
+            await websocket.send_json({
+                "type": "read_update_error",
+                "chat_id": chat_id,
+                "message_id": message_id,
+                "error": f"Failed to mark message as read: {str(read_error)}"
+            })
+            
+    except Exception as e:
+        logger.error(f"Error in handle_mark_message_read: {e}")
+        await websocket.send_json({
+            "type": "read_update_error",
+            "chat_id": data.get("chat_id"),
+            "message_id": data.get("message_id"),
+            "error": f"Internal error: {str(e)}"
+        })
+
+async def broadcast_read_update(data: dict):
+    """Broadcast read status updates to all connected WebSocket clients"""
+    try:
+        # Broadcast to all WebSocket connections in the realtime service
+        if realtime_service.websocket_connections:
+            disconnected = set()
+            for websocket in realtime_service.websocket_connections:
+                try:
+                    await websocket.send_json(data)
+                except Exception as e:
+                    logger.warning(f"Failed to send read update to WebSocket: {e}")
+                    disconnected.add(websocket)
+            
+            # Remove disconnected WebSocket connections
+            for websocket in disconnected:
+                realtime_service.websocket_connections.discard(websocket)
+                
+    except Exception as e:
+        logger.error(f"Error broadcasting read update: {e}")
+
+async def broadcast_new_message(data: dict, exclude_websocket=None):
+    """Broadcast new message to all connected WebSocket clients except the sender"""
+    try:
+        # Broadcast to all WebSocket connections in the realtime service
+        if realtime_service.websocket_connections:
+            disconnected = set()
+            for websocket in realtime_service.websocket_connections:
+                # Skip the sender's WebSocket to avoid duplicate messages
+                if exclude_websocket and websocket == exclude_websocket:
+                    continue
+                    
+                try:
+                    await websocket.send_json(data)
+                except Exception as e:
+                    logger.warning(f"Failed to send new message to WebSocket: {e}")
+                    disconnected.add(websocket)
+            
+            # Remove disconnected WebSocket connections
+            for websocket in disconnected:
+                realtime_service.websocket_connections.discard(websocket)
+                
+    except Exception as e:
+        logger.error(f"Error broadcasting new message: {e}")
+
 async def websocket_endpoint(websocket: WebSocket):
     """WebSocket endpoint for real-time messages"""
     await websocket.accept()
@@ -142,6 +486,15 @@ async def websocket_endpoint(websocket: WebSocket):
                         "active_sessions": active_sessions,
                         "connection_count": len(realtime_service.websocket_connections)
                     })
+                elif data.get("type") == "send_message":
+                    # Handle sending message via WebSocket
+                    await handle_send_message(websocket, data)
+                elif data.get("type") == "mark_messages_read":
+                    # Handle marking all messages as read
+                    await handle_mark_messages_read(websocket, data)
+                elif data.get("type") == "mark_message_read":
+                    # Handle marking specific message as read
+                    await handle_mark_message_read(websocket, data)
                     
             except WebSocketDisconnect:
                 break
