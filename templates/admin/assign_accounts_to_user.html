@@ -1,0 +1,104 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block title %}{{ title }} | {{ site_title|default:"Telegram Admin" }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label='api' %}">Api</a>
+    &rsaquo; <a href="{% url 'admin:api_telegramaccount_changelist' %}">Telegram accounts</a>
+    &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="module aligned">
+    <h1>{{ title }}</h1>
+    
+    <div class="form-row">
+        <h3>Selected Accounts ({{ accounts.count }})</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Phone</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Current Assignment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                <tr>
+                    <td>{{ account.id }}</td>
+                    <td>{{ account.phone|default:"-" }}</td>
+                    <td>{{ account.username|default:"-" }}</td>
+                    <td>{{ account.first_name }} {{ account.last_name }}</td>
+                    <td>
+                        {% if account.user %}
+                            <strong>{{ account.user.name|default:account.user.email }}</strong>
+                        {% else %}
+                            <span style="color: orange;">Unassigned</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <fieldset class="module aligned">
+            <h2>Assign to User</h2>
+            
+            <div class="form-row">
+                <div>
+                    <label for="user_id">Select User:</label>
+                    <select name="user_id" id="user_id" required>
+                        <option value="">---------</option>
+                        {% for user in users %}
+                        <option value="{{ user.id }}">
+                            {{ user.name|default:user.email }} ({{ user.email }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="submit-row">
+            <input type="submit" value="Assign Accounts" class="default" />
+            <p class="deletelink-box">
+                <a href="{% url 'admin:api_telegramaccount_changelist' %}" class="deletelink">Cancel</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+    }
+    
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    
+    .form-row select {
+        width: 300px;
+        padding: 5px;
+    }
+</style>
+{% endblock %}

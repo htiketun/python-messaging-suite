@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.models.telegram_chat import TelegramChat
 from api.models.telegram_message import TelegramMessage
+from api.serializers.telegram_account import TelegramAccountSerializer
 from api.serializers.telegram_chat import TelegramChatSerializer
 from api.serializers.telegram_message import TelegramMessageSerializer
 from django.shortcuts import get_object_or_404
@@ -17,8 +18,49 @@ class TelegramAccountListView(generics.ListAPIView):
     serializer_class = None  # No serializer needed for listing accounts
 
     def post(self, request, *args, **kwargs):
-        accounts = TelegramAccount.objects.all().values('id', 'session_file', 'phone', 'username', 'first_name', 'last_name', 'photo', 'unread_count', 'is_active', 'last_seen')
+        accounts = TelegramAccount.objects.select_related('user').all().values('id', 'session_file', 'phone', 'username', 'first_name', 'last_name', 'photo', 'unread_count', 'is_active', 'last_seen')
         return Response(list(accounts), status=status.HTTP_200_OK)
+
+
+class UserTelegramAccountsView(APIView):
+    """Get Telegram accounts assigned to the currently logged-in user"""
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        """Return Telegram accounts assigned to the current user"""
+        user = request.user
+        
+        # Get accounts assigned to the current user
+        accounts = TelegramAccount.objects.filter(user=user).select_related('user')
+        
+        # Use serializer for consistent data structure
+        serializer = TelegramAccountSerializer(accounts, many=True)
+        account_data = serializer.data
+        
+        # Add session file existence check for each account
+        for i, account in enumerate(accounts):
+            session_file_exists = False
+            if account.session_file:
+                session_path = os.path.join('sessions', account.session_file)
+                session_file_exists = os.path.exists(session_path)
+            account_data[i]['session_file_exists'] = session_file_exists
+        
+        return Response({
+            'success': True,
+            'user': {
+                'id': user.id,
+                'email': user.email,
+                'name': user.name,
+                'is_active': user.is_active,
+            },
+            'telegram_accounts': account_data,
+            'total_accounts': len(account_data),
+            'active_accounts': len([acc for acc in account_data if acc['is_active']])
+        }, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        """Alternative POST method for compatibility"""
+        return self.get(request)
 class TelegramChatListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = TelegramChatSerializer
@@ -29,7 +71,7 @@ class TelegramChatListView(generics.ListAPIView):
             return Response([], status=status.HTTP_200_OK)
         queryset = TelegramChat.objects.filter(
             telegram_account_id=telegram_account_id
-        ).order_by('-last_message_id')
+        ).filter(is_active=None).order_by('-last_message_id')
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
 
@@ -88,8 +130,12 @@ class TelegramChatMessagesView(generics.ListAPIView):
     serializer_class = TelegramMessageSerializer
     pagination_class = TelegramMessagePagination
 
+    def get_queryset(self):
+        chat_id = self.kwargs.get('id')
+        return TelegramMessage.objects.filter(chat_id=chat_id).order_by('-date')
+
     def post(self, request, id):
-        queryset = TelegramMessage.objects.filter(chat_id=id).order_by('-date')
+        queryset = self.get_queryset()
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)

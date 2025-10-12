@@ -1,6 +1,4 @@
 from django.db import models
-from .user import User
-from .telegram_account import TelegramAccount
 
 class UserTelegramAccount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

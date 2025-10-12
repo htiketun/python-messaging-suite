@@ -72,7 +72,7 @@ ROOT_URLCONF = 'python-messaging-suite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,4 +162,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Telegram API Configuration
 TELEGRAM_API_ID = os.environ.get('TELEGRAM_API_ID', '20724149')
 TELEGRAM_API_HASH = os.environ.get('TELEGRAM_API_HASH', 'd919f276e10b80ab0b5bf4dad0121663')
-TELEGRAM_SESSION_FOLDER = os.path.join(BASE_DIR, 'sessions')
+TELEGRAM_SESSION_FOLDER = os.path.join(BASE_DIR, 'tweb-sessions')
+
+# Django Admin Customization
+# These settings customize the Django admin interface
+ADMIN_SITE_HEADER = "Telegram Management System"
+ADMIN_SITE_TITLE = "Telegram Admin"
+ADMIN_INDEX_TITLE = "Welcome to Telegram Management Portal"

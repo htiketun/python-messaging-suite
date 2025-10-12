@@ -7,6 +7,7 @@ class TelegramMessage(models.Model):
     sender_id = models.BigIntegerField(null=True, blank=True, db_index=True)
     text = models.TextField(null=True, blank=True)
     date = models.DateTimeField()
+    is_read = models.BooleanField(default=False)
 
     class Meta:
         unique_together = (('chat_id', 'telegram_account_id', 'message_id'),)

@@ -1,0 +1,339 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block title %}{{ title }} | {{ site_title|default:"Telegram Admin" }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label='api' %}">API</a>
+&rsaquo; <a href="{% url 'admin:api_telegramaccount_changelist' %}">Telegram accounts</a>
+&rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <div class="module aligned">
+        <h2>Session Files Management</h2>
+        <p>Manage session files and sync them with the database.</p>
+        
+        <div class="session-files-section">
+            <h3>Session Files in Directory ({{ session_file_data|length }} files)</h3>
+            
+            {% if session_file_data %}
+                <table class="session-files-table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Status</th>
+                            <th>Telegram Account</th>
+                            <th>Assigned User</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file_data in session_file_data %}
+                            <tr>
+                                <td>{{ file_data.filename }}</td>
+                                <td>
+                                    {% if file_data.has_account %}
+                                        <span class="status-assigned">✓ Assigned</span>
+                                    {% else %}
+                                        <span class="status-orphaned">⚠ Orphaned</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file_data.account %}
+                                        <a href="{% url 'admin:api_telegramaccount_change' file_data.account.id %}">
+                                            {{ file_data.account.phone|default:file_data.account.username|default:"Unknown" }}
+                                        </a>
+                                    {% else %}
+                                        <em>No account assigned</em>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file_data.account and file_data.account.user %}
+                                        <strong>{{ file_data.account.user.name|default:file_data.account.user.email }}</strong>
+                                        <br><small>{{ file_data.account.user.email }}</small>
+                                    {% elif file_data.account %}
+                                        <span class="unassigned">⚠️ Unassigned</span>
+                                    {% else %}
+                                        <span class="no-account">No account</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if file_data.account %}
+                                        <a href="{% url 'admin:api_telegramaccount_change' file_data.account.id %}" class="button small">Edit Account</a>
+                                    {% else %}
+                                        <em>Sync first</em>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No session files found in the {{ sessions_dir }} directory.</p>
+                <p><strong>To add session files:</strong></p>
+                <ol>
+                    <li>Copy your .session files to the <code>{{ sessions_dir }}/</code> directory</li>
+                    <li>Or use the upload API endpoint</li>
+                    <li>Then return here to sync them</li>
+                </ol>
+            {% endif %}
+        </div>
+        
+        <div class="upload-section" style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px;">
+            <h3>Upload Session Files</h3>
+            <form enctype="multipart/form-data" method="post" id="sessionupload_form">
+                {% csrf_token %}
+                <div class="form-row">
+                    <label for="session_files">Select Session Files:</label>
+                    <input type="file" id="session_files" name="session_files" multiple accept=".session" required>
+                    <div class="help">Select one or more .session files to upload</div>
+                </div>
+                <div class="submit-row">
+                    <input type="submit" value="📤 Upload Files" class="upload-button">
+                </div>
+            </form>
+        </div>
+
+        <div class="actions-section" style="margin-top: 30px;">
+            <h3>Actions</h3>
+            <div class="action-buttons">
+                <a href="../sync-all/" class="button sync-button" onclick="return confirm('Sync all session files? This may take some time.');">
+                    🔄 Sync All Session Files
+                </a>
+                <a href="{% url 'admin:api_telegramaccount_changelist' %}" class="button">
+                    👥 Manage Accounts
+                </a>
+                <a href="../user-assignment-management/" class="button">
+                    🔗 User Assignment Management
+                </a>
+            </div>
+        </div>
+        
+        <div class="instructions-section" style="margin-top: 30px;">
+            <h3>Instructions:</h3>
+            <ol>
+                <li><strong>Upload Session Files:</strong> Use the upload form above to select and upload .session files</li>
+                <li><strong>Sync Files:</strong> Click "Sync All Session Files" to create accounts for orphaned files</li>
+                <li><strong>Assign Users:</strong> Use "Manage Accounts" to assign accounts to specific users</li>
+                <li><strong>Monitor Status:</strong> Check the table above to see which files are assigned</li>
+            </ol>
+            
+            <div class="note" style="background: #e8f4fd; padding: 15px; border-left: 4px solid #2196F3; margin-top: 15px;">
+                <strong>Note:</strong> You can also copy .session files directly to the <code>{{ sessions_dir }}/</code> directory if you prefer manual upload.
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.module {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.session-files-section {
+    margin-bottom: 20px;
+}
+
+.session-files-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.session-files-table th,
+.session-files-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.session-files-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.status-assigned {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-orphaned {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.actions-section {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.sync-button {
+    background: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+}
+
+.sync-button:hover {
+    background: #218838 !important;
+    border-color: #1e7e34 !important;
+}
+
+.upload-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.upload-section .form-row {
+    margin-bottom: 15px;
+}
+
+.upload-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.upload-section input[type="file"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.upload-section .help {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.upload-section .submit-row {
+    margin-top: 15px;
+}
+
+.upload-button {
+    background: #007cba !important;
+    border-color: #007cba !important;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.upload-button:hover {
+    background: #005a87 !important;
+    border-color: #005a87 !important;
+}
+
+.instructions-section {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.unassigned {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+.no-account {
+    color: #666;
+    font-style: italic;
+}
+
+.button.small {
+    padding: 4px 8px;
+    font-size: 11px;
+    text-decoration: none;
+    display: inline-block;
+    background: #007cba;
+    color: white;
+    border: 1px solid #007cba;
+    border-radius: 3px;
+}
+
+.button.small:hover {
+    background: #005a87;
+    border-color: #005a87;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('session_files');
+    const uploadForm = document.getElementById('sessionupload_form');
+    
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            let validFiles = 0;
+            let invalidFiles = [];
+            
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].name.endsWith('.session')) {
+                    validFiles++;
+                } else {
+                    invalidFiles.push(files[i].name);
+                }
+            }
+            
+            // Show file selection feedback
+            const helpText = document.querySelector('.upload-section .help');
+            if (files.length > 0) {
+                helpText.innerHTML = `Selected ${files.length} files (${validFiles} valid .session files)`;
+                helpText.style.color = validFiles > 0 ? '#28a745' : '#dc3545';
+            } else {
+                helpText.innerHTML = 'Select one or more .session files to upload';
+                helpText.style.color = '#666';
+            }
+            
+            if (invalidFiles.length > 0) {
+                alert('Warning: The following files are not .session files and will be rejected:\n' + invalidFiles.join('\n'));
+            }
+        });
+    }
+    
+    if (uploadForm) {
+        uploadForm.addEventListener('submit', function(e) {
+            const files = fileInput.files;
+            if (files.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one file to upload.');
+                return false;
+            }
+            
+            // Show upload progress
+            const submitButton = uploadForm.querySelector('input[type="submit"]');
+            submitButton.value = '📤 Uploading...';
+            submitButton.disabled = true;
+            
+            // Re-enable button after a delay (in case of errors)
+            setTimeout(function() {
+                if (submitButton.disabled) {
+                    submitButton.value = '📤 Upload Files';
+                    submitButton.disabled = false;
+                }
+            }, 10000);
+        });
+    }
+});
+</script>
+{% endblock %}

@@ -12,6 +12,8 @@ async def sync_dialog_messages(client, conn, telegram_account_id, dialog_id, dir
                "new" for messages after last synced (newer than newest),
                "old" for messages before oldest synced (older than oldest)
     """
+    if dialog_id == 777000:
+        dialog_id = telegram_account_id  # Handle Telegram system messages
     try:
         if direction == "latest":
             # iter_messages returns newest to oldest by default

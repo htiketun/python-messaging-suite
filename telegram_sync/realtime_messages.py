@@ -1,6 +1,7 @@
 import asyncio
 import json
 import logging
+import os
 from typing import Dict, Set, List, Optional
 from datetime import datetime
 from telethon import TelegramClient, events
@@ -14,28 +15,30 @@ class RealTimeMessageService:
     """Service for handling real-time Telegram messages via WebSocket"""
     
     def __init__(self):
-        self.active_sessions: Dict[str, TelegramClient] = {}
+        # Remove active_sessions - we'll use the shared client from chat_list_service
         self.websocket_connections: Set = set()
         self.monitored_chats: Dict[str, Set[int]] = {}  # session_file -> set of chat_ids
         self.running = False
+        self.message_handlers: Dict[str, List] = {}  # session_file -> list of handlers
         
+
     async def start_monitoring(self, session_file: str, chat_ids: Optional[List[int]] = None):
-        """Start monitoring messages for a session"""
+        """Start monitoring messages for a session - uses shared client from chat_list_service"""
         try:
-            if session_file in self.active_sessions:
-                logger.info(f"Session {session_file} is already being monitored")
-                return
+            # Import here to avoid circular imports
+            from .realtime_chat_list import chat_list_service
             
-            # Create and start Telegram client
-            client = TelegramClient(session_file, config.TELEGRAM_API_ID, config.TELEGRAM_API_HASH)
-            await client.start()
-            
-            if not await client.is_user_authorized():
-                logger.error(f"Session {session_file} is not authorized")
+            # Check if the session is already being monitored by chat_list_service
+            if session_file not in chat_list_service.active_sessions:
+                logger.error(f"Session {session_file} is not active in chat_list_service. Start chat monitoring first.")
                 return False
             
-            # Store the client
-            self.active_sessions[session_file] = client
+            # Use the existing client from chat_list_service
+            client = chat_list_service.active_sessions[session_file]
+            
+            if session_file in self.monitored_chats:
+                logger.info(f"Message monitoring for session {session_file} is already active")
+                return True
             
             # Set up monitored chats
             if chat_ids:
@@ -48,17 +51,23 @@ class RealTimeMessageService:
                 self.monitored_chats[session_file] = set(all_chat_ids) if all_chat_ids else set()
                 await conn.close()
             
+            # Store event handlers for this session so we can remove them later
+            self.message_handlers[session_file] = []
+            
             # Add event handler for new messages
             @client.on(events.NewMessage)
             async def handle_new_message(event):
                 await self._handle_new_message(session_file, event)
             
-            # Add event handler for edited messages
+            # Add event handler for edited messages  
             @client.on(events.MessageEdited)
             async def handle_edited_message(event):
                 await self._handle_edited_message(session_file, event)
             
-            logger.info(f"Started real-time monitoring for session {session_file} with {len(self.monitored_chats[session_file])} chats")
+            # Store handlers for cleanup
+            self.message_handlers[session_file] = [handle_new_message, handle_edited_message]
+            
+            logger.info(f"Started real-time message monitoring for session {session_file} with {len(self.monitored_chats[session_file])} chats")
             return True
             
         except Exception as e:
@@ -68,18 +77,17 @@ class RealTimeMessageService:
     async def stop_monitoring(self, session_file: str):
         """Stop monitoring messages for a session"""
         try:
-            if session_file in self.active_sessions:
-                client = self.active_sessions[session_file]
-                await client.disconnect()
-                del self.active_sessions[session_file]
+            # Remove event handlers (note: in Telethon, handlers are automatically cleaned up when client disconnects)
+            if session_file in self.message_handlers:
+                del self.message_handlers[session_file]
                 
             if session_file in self.monitored_chats:
                 del self.monitored_chats[session_file]
                 
-            logger.info(f"Stopped monitoring for session {session_file}")
+            logger.info(f"Stopped message monitoring for session {session_file}")
             
         except Exception as e:
-            logger.error(f"Error stopping monitoring for session {session_file}: {e}")
+            logger.error(f"Error stopping message monitoring for session {session_file}: {e}")
     
     async def add_websocket(self, websocket):
         """Add a WebSocket connection"""
@@ -110,6 +118,7 @@ class RealTimeMessageService:
             telegram_account_id = await db.get_telegram_account_id(conn, session_file)
             if telegram_account_id:
                 await db.upsert_message(conn, telegram_account_id, chat_id, message)
+                await db.set_last_synced_message(conn, telegram_account_id, chat_id, message.id, message.date, newest=True)
             await conn.close()
             
             # Prepare message data for WebSocket
@@ -209,7 +218,7 @@ class RealTimeMessageService:
     
     async def get_active_sessions(self) -> List[str]:
         """Get list of active monitoring sessions"""
-        return list(self.active_sessions.keys())
+        return list(self.monitored_chats.keys())
     
     async def get_monitored_chats(self, session_file: str) -> List[int]:
         """Get list of monitored chats for a session"""
@@ -229,10 +238,10 @@ class RealTimeMessageService:
             logger.info(f"Removed chat {chat_id} from monitoring for session {session_file}")
     
     async def shutdown(self):
-        """Shutdown the service and disconnect all clients"""
+        """Shutdown the service and clean up handlers"""
         logger.info("Shutting down real-time message service...")
         
-        for session_file in list(self.active_sessions.keys()):
+        for session_file in list(self.monitored_chats.keys()):
             await self.stop_monitoring(session_file)
         
         self.websocket_connections.clear()

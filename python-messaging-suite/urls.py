@@ -19,9 +19,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# Customize Django Admin Interface
+admin.site.site_header = getattr(settings, 'ADMIN_SITE_HEADER', 'Telegram Management System')
+admin.site.site_title = getattr(settings, 'ADMIN_SITE_TITLE', 'Telegram Admin')
+admin.site.index_title = getattr(settings, 'ADMIN_INDEX_TITLE', 'Welcome to Telegram Management Portal')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path('api/', include('api.urls'))
 ]
 
 if settings.DEBUG:

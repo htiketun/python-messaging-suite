@@ -1,12 +1,11 @@
-from fastapi import FastAPI, BackgroundTasks, Query, WebSocket, WebSocketDisconnect
-from pydantic import BaseModel
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 import logging
-import telegram_sync.sync_messages as sync_messages
-import telegram_sync.sync_chats as sync_chats
 import telegram_sync.session_manager as sm
 
 logger = logging.getLogger(__name__)
+
 from telegram_sync.realtime_api import (
     StartMonitoringRequest,
     StopMonitoringRequest,
@@ -23,47 +22,14 @@ from telegram_sync.realtime_chat_list import chat_list_service
 
 app = FastAPI(title="Telegram Messaging Suite API", version="1.0.0")
 
-class SyncRequest(BaseModel):
-    session_file: str = None
-    chat_id: int = None
-    direction: str = "new"
-    limit: int = 100
-
-@app.post("/telegram-chats/")
-async def sync_chats_api(session_file: str = None):
-    """
-    Trigger Telegram chat sync. Optionally provide a session file.
-    """
-    session_files = [session_file] if session_file else None
-    session_files = sm.get_session_files(session_files)
-    try:
-        await sync_chats.main(session_files=session_files)
-        return {"status": "success", "message": "Chats synced successfully"}
-    except Exception as e:
-        return {"status": "error", "detail": str(e)}
-
-# curl -X POST "http://localhost:8000/telegram-chats/?session_file=path/to/session.session"
-# curl -X POST "http://localhost:8000/telegram-chats/"
-@app.post("/telegram-messages/")
-async def sync_messages_api(req: SyncRequest):
-    session_files = [req.session_file] if req.session_file else None
-    session_files = sm.get_session_files(session_files)
-    # You may want to validate session_file path here!
-    try:
-        await sync_messages.main(
-            full_sync=False,
-            session_files=session_files,
-            chat_id=req.chat_id,
-            direction=req.direction,
-            limit=req.limit
-        )
-        return {"status": "success"}
-    except Exception as e:
-        return {"status": "error", "detail": str(e)}
-    
-#     curl -X POST http://localhost:8000/sync-messages/ \
-#   -H "Content-Type: application/json" \
-#   -d '{"session_file": "path/to/session.session", "chat_id": 123456, "direction": "new", "limit": 100}'
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:7777", "http://127.0.0.1:7777", "http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Real-time messaging endpoints
 
@@ -98,6 +64,7 @@ async def remove_chat_endpoint(request: RemoveChatRequest):
 async def start_chat_list_monitoring_endpoint(session_file: str):
     """Start real-time chat list monitoring for a session"""
     try:
+       
         success = await chat_list_service.start_monitoring(session_file)
         
         if success:
@@ -143,6 +110,68 @@ async def chat_list_status_endpoint():
     except Exception as e:
         logger.error(f"Error getting chat list status: {e}")
         return {"status": "error", "message": str(e)}
+
+@app.get("/realtime/age-gender/{chat_id}")
+async def get_age_gender_endpoint(chat_id: int, session_file: str):
+    """
+    Get or predict age and gender for a specific chat
+    """
+    try:
+        
+        # Check if session is being monitored
+        if session_file not in chat_list_service.active_sessions:
+            return {
+                "status": "error",
+                "message": f"Session {session_file} is not currently being monitored. Start monitoring first."
+            }
+        
+        # Get age and gender data
+        result = await chat_list_service.get_or_predict_age_gender(chat_id, session_file)
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error getting age/gender: {e}")
+        return {
+            "status": "error", 
+            "message": str(e),
+            "chat_id": chat_id,
+            "session_file": session_file
+        }
+
+@app.post("/realtime/bulk-predict-age-gender/")
+async def bulk_predict_age_gender_endpoint(
+    session_file: str, 
+    force_update: bool = False
+):
+    """
+    Bulk predict age and gender for all private chats in a session
+    
+    Args:
+        session_file: The session file to process
+        force_update: If True, update even chats that already have age/gender data
+    """
+    try:
+        
+        # Check if session is being monitored
+        if session_file not in chat_list_service.active_sessions:
+            return {
+                "status": "error",
+                "message": f"Session {session_file} is not currently being monitored. Start monitoring first."
+            }
+        
+        # Run bulk prediction
+        result = await chat_list_service.bulk_predict_age_gender(session_file, force_update)
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error in bulk prediction: {e}")
+        return {
+            "status": "error", 
+            "message": str(e),
+            "session_file": session_file
+        }
 
 @app.websocket("/ws/messages")
 async def websocket_messages_endpoint(websocket: WebSocket):
@@ -203,17 +232,3 @@ async def websocket_chat_list_endpoint(websocket: WebSocket):
         logger.error(f"Chat list WebSocket error: {e}")
     finally:
         await chat_list_service.remove_websocket(websocket)
-
-# Example usage:
-# Start monitoring:
-# curl -X POST "http://localhost:8000/realtime/start-monitoring/" \
-#   -H "Content-Type: application/json" \
-#   -d '{"session_file": "path/to/session.session", "chat_ids": [123456, 789012]}'
-#
-# WebSocket connection:
-# ws://localhost:8000/ws/messages
-#
-# Stop monitoring:
-# curl -X POST "http://localhost:8000/realtime/stop-monitoring/" \
-#   -H "Content-Type: application/json" \
-#   -d '{"session_file": "path/to/session.session"}'

@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:"Telegram Admin" }}{% endblock %}
+
+{% block branding %}
+<div id="branding">
+{% load i18n %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:"Telegram Management System" }}</a></h1>
+{% if user.is_anonymous %}
+    {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+</div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
