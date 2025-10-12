@@ -26,6 +26,13 @@ import re
 from openai import OpenAI
 import random
 
+class DateTimeEncoder(json.JSONEncoder):
+    """Custom JSON encoder for datetime objects"""
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
+
 logger = logging.getLogger(__name__)
 
 class RealtimeChatListService:
@@ -60,6 +67,17 @@ class RealtimeChatListService:
         
         # Return absolute path
         return os.path.abspath(session_file)
+    
+    def _serialize_datetime_objects(self, obj):
+        """Recursively serialize datetime objects to ISO format strings"""
+        if isinstance(obj, dict):
+            return {k: self._serialize_datetime_objects(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self._serialize_datetime_objects(item) for item in obj]
+        elif isinstance(obj, datetime):
+            return obj.isoformat()
+        else:
+            return obj
 
     async def add_websocket(self, websocket):
         """Add a WebSocket connection for broadcasting"""
@@ -79,7 +97,9 @@ class RealtimeChatListService:
         disconnected = set()
         for websocket in self.websocket_connections.copy():
             try:
-                await websocket.send_json(data)
+                # Convert data to JSON string with datetime handling, then send
+                json_data = json.dumps(data, cls=DateTimeEncoder)
+                await websocket.send_text(json_data)
             except Exception as e:
                 logger.error(f"Error sending to WebSocket: {e}")
                 disconnected.add(websocket)
@@ -216,12 +236,13 @@ class RealtimeChatListService:
             }
             
             # Broadcast initial chat list to WebSocket clients
-            await self.broadcast_to_websockets({
+            broadcast_data = {
                 'type': 'chat_list_initial',
                 'session_file': session_file,
                 'chats': chats,
                 'timestamp': datetime.now().isoformat()
-            })
+            }
+            await self.broadcast_to_websockets(self._serialize_datetime_objects(broadcast_data))
             
             logger.info(f"Loaded {len(chats)} chats for session: {session_file}")
             
@@ -234,35 +255,9 @@ class RealtimeChatListService:
     async def _format_chat_data(self, dialog, me_id: int) -> dict:
         """Format dialog data for broadcasting"""
         chat_data = await self.get_chat_data(dialog.id, me_id, message_limit=1)
-        # entity = dialog.entity
         
-        # # Get basic chat info
-        # chat_data = {
-        #     'id': dialog.id,
-        #     'name': self._get_chat_name(entity),
-        #     'type': self._get_chat_type(entity),
-        #     'unread_count': dialog.unread_count,
-        #     'is_pinned': dialog.pinned,
-        #     'is_muted': dialog.archived,  # Using archived as muted indicator
-        #     'last_message': None,
-        #     'online_status': None,
-        #     'photo_url': None
-        # }
-        
-        # # Add last message info
-        # if dialog.message:
-        #     chat_data['last_message'] = {
-        #         'id': dialog.message.id,
-        #         'text': getattr(dialog.message, 'message', '') or '[Media]',
-        #         'date': dialog.message.date.isoformat() if dialog.message.date else None,
-        #         'from_me': dialog.message.sender_id == me_id
-        #     }
-            
-        # # Add online status for users
-        # if isinstance(entity, User) and hasattr(entity, 'status'):
-        #     chat_data['online_status'] = self._get_user_status(entity.status)
-            
-        return chat_data
+        # Ensure all datetime objects are converted to ISO format strings
+        return self._serialize_datetime_objects(chat_data)
         
     def _get_chat_name(self, entity) -> str:
         """Get chat display name"""
@@ -340,11 +335,12 @@ class RealtimeChatListService:
         async def handle_user_update(event):
             """Handle user status updates"""
             try:
+                status_data = self._get_user_status(event.status, type='object') if hasattr(event, 'status') else None
                 await self.broadcast_to_websockets({
                     'type': 'user_status_update',
                     'session_file': session_file,
                     'user_id': event.user_id,
-                    'status': self._get_user_status(event.status, type='object') if hasattr(event, 'status') else None,
+                    'status': status_data,
                     'timestamp': datetime.now().isoformat()
                 })
             except Exception as e:
@@ -454,8 +450,9 @@ class RealtimeChatListService:
             else:
                 result['last_message'] = None
                 result['messages'] = []
-                
-            return result
+            
+            # Serialize datetime objects to ensure JSON compatibility
+            return self._serialize_datetime_objects(result)
             
         except Exception as e:
             logger.error(f"Error getting chat data for chat_id {chat_id}: {e}")

@@ -1,0 +1,59 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static %}
+
+{% block object-tools %}
+    {% if has_add_permission %}
+        <ul class="object-tools">
+            <li>
+                <a href="session-management/" class="addlink">
+                    📁 Session Management
+                </a>
+            </li>
+            <li>
+                <a href="user-assignment-management/" class="addlink" style="background: #17a2b8; border-color: #17a2b8;">
+                    🔗 User Assignment
+                </a>
+            </li>
+            <li>
+                <a href="sync-all/" class="addlink" style="background: #28a745; border-color: #28a745;">
+                    Sync All Sessions
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'admin:api_telegramaccount_add' %}" class="addlink">
+                    {% blocktranslate with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktranslate %}
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add confirmation for sync all button
+        const syncAllButton = document.querySelector('a[href="sync-all/"]');
+        if (syncAllButton) {
+            syncAllButton.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to sync all session files? This may take some time.')) {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+    </script>
+    
+    <style>
+    .object-tools li a[href="sync-all/"] {
+        background: #28a745 !important;
+        border-color: #28a745 !important;
+    }
+    
+    .object-tools li a[href="sync-all/"]:hover {
+        background: #218838 !important;
+        border-color: #1e7e34 !important;
+    }
+    </style>
+{% endblock %}

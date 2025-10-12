@@ -81,7 +81,7 @@ async def websocket_sync_messages(ws: WebSocket):
             pass
 
 
-{"session_file":"session_909aed7e.session","chat_id":7127517690,"direction":"new","limit":10,"type":"messageSync"}
+# {"session_file":"session_909aed7e.session","chat_id":7127517690,"direction":"new","limit":10,"type":"messageSync"}
 
 
 # Connect to ws://localhost:8000/ws/telegram-chats/ (as a WebSocket client)

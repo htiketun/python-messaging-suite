@@ -118,6 +118,7 @@ class RealTimeMessageService:
             telegram_account_id = await db.get_telegram_account_id(conn, session_file)
             if telegram_account_id:
                 await db.upsert_message(conn, telegram_account_id, chat_id, message)
+                await db.set_last_synced_message(conn, telegram_account_id, chat_id, message.id, message.date, newest=True)
             await conn.close()
             
             # Prepare message data for WebSocket

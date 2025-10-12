@@ -10,6 +10,8 @@ async def upsert_chat(conn, telegram_account_id, chat, full_photo_url=None, gend
     logging.info(f"Upserting chat for account {telegram_account_id}: {chat.name}")
     import datetime
 
+    if chat.id == 777000:
+        chat.id = telegram_account_id
     # Convert last_seen to datetime if it's a string
     if isinstance(last_seen, str):
         try:

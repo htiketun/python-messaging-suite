@@ -101,3 +101,939 @@
 2025-10-02 17:23:10,963 INFO:Upserting chat for account 7216516818: smsActivateruBot
 2025-10-02 17:23:12,978 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
 2025-10-02 17:23:12,979 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-07 10:04:40,787 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-07 10:04:40,821 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-07 10:04:43,806 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:04:43,811 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-07 10:04:46,389 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:04:46,404 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-07 10:04:46,471 INFO:Connecting to 149.154.167.41:443/TcpFull...
+2025-10-07 10:04:48,675 INFO:Connection to 149.154.167.41:443/TcpFull complete!
+2025-10-07 10:04:48,676 INFO:Exporting auth for new borrowed sender in DcOption(id=2, ip_address='149.154.167.41', port=443, ipv6=False, media_only=False, tcpo_only=False, cdn=False, static=False, this_port_only=False, secret=None)
+2025-10-07 10:04:50,351 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-07 10:04:51,979 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:04:51,982 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-07 10:04:53,977 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:04:53,981 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-07 10:04:53,982 INFO:Connecting to 149.154.167.92:443/TcpFull...
+2025-10-07 10:04:55,848 INFO:Connection to 149.154.167.92:443/TcpFull complete!
+2025-10-07 10:04:55,849 INFO:Exporting auth for new borrowed sender in DcOption(id=4, ip_address='149.154.167.92', port=443, ipv6=False, media_only=False, tcpo_only=False, cdn=False, static=False, this_port_only=False, secret=None)
+2025-10-07 10:04:57,047 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-07 10:04:58,160 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:04:58,171 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-07 10:04:58,241 INFO:Got difference for channel 1555520903 updates
+2025-10-07 10:04:59,379 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:04:59,383 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-07 10:04:59,646 INFO:Upserting chat for account 7216516818: FreedomVPN_bot
+2025-10-07 10:05:00,314 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:00,320 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-07 10:05:02,367 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:02,369 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-07 10:05:03,431 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:03,462 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-07 10:05:04,771 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:04,804 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-07 10:05:04,881 INFO:Got difference for channel 1745919541 updates
+2025-10-07 10:05:05,145 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-07 10:05:06,962 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:06,981 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-07 10:05:07,218 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-07 10:05:08,176 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:08,182 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-07 10:05:08,366 INFO:Got difference for channel 1745919541 updates
+2025-10-07 10:05:08,484 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-07 10:05:09,376 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:09,380 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-07 10:05:10,133 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:10,137 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-07 10:05:11,272 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:11,277 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-07 10:05:11,675 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-07 10:05:11,920 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-07 10:05:12,176 INFO:Upserting chat for account 7216516818: Translator
+2025-10-07 10:05:12,415 INFO:Upserting chat for account 7216516818: Searchee Bot
+2025-10-07 10:05:12,649 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-07 10:05:13,658 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:13,663 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-07 10:05:14,738 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:14,748 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-07 10:05:15,679 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:15,681 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-07 10:05:16,549 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 10:05:16,558 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-07 10:05:16,628 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-07 10:05:16,853 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-07 10:05:18,870 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-07 10:05:18,871 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-07 10:05:18,871 INFO:Disconnecting from 149.154.167.41:443/TcpFull...
+2025-10-07 10:05:18,872 INFO:Disconnection from 149.154.167.41:443/TcpFull complete!
+2025-10-07 10:05:18,872 INFO:Disconnecting from 149.154.167.92:443/TcpFull...
+2025-10-07 10:05:18,873 INFO:Disconnection from 149.154.167.92:443/TcpFull complete!
+2025-10-07 10:05:18,880 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-07 10:05:18,917 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-07 10:05:20,023 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-07 10:05:20,097 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-07 10:05:20,098 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-07 10:05:20,191 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-07 10:05:20,280 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-07 10:05:20,366 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-07 10:05:20,503 INFO:Upserting chat for account 7216516818: FreedomVPN_bot
+2025-10-07 10:05:20,504 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-07 10:05:20,626 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-07 10:05:21,078 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-07 10:05:21,190 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-07 10:05:21,262 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-07 10:05:21,339 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-07 10:05:21,411 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-07 10:05:21,549 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-07 10:05:21,688 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-07 10:05:21,791 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-07 10:05:21,869 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-07 10:05:21,934 INFO:Upserting chat for account 7216516818: Translator
+2025-10-07 10:05:22,005 INFO:Upserting chat for account 7216516818: Searchee Bot
+2025-10-07 10:05:22,090 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-07 10:05:22,195 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-07 10:05:22,264 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-07 10:05:22,343 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-07 10:05:22,421 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-07 10:05:22,494 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-07 10:05:22,574 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-07 10:05:24,582 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-07 10:05:24,583 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-07 10:05:24,593 ERROR:Error with session ./sessions\test_session.session: file is not a database
+2025-10-07 13:03:55,798 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-07 13:03:55,834 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-07 13:03:58,218 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:03:58,226 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-07 13:03:59,024 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:03:59,025 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-07 13:04:01,549 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:01,556 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-07 13:04:04,292 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:04,297 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-07 13:04:05,496 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:05,499 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-07 13:04:07,454 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:07,457 INFO:Upserting chat for account 7216516818: FreedomVPN_bot
+2025-10-07 13:04:10,638 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:10,639 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-07 13:04:12,375 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:12,384 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-07 13:04:14,374 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:14,380 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-07 13:04:15,834 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:15,837 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-07 13:04:16,967 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:16,976 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-07 13:04:18,175 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:18,200 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-07 13:04:19,673 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:19,674 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-07 13:04:20,704 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:20,707 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-07 13:04:22,906 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:22,914 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-07 13:04:23,986 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:23,987 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-07 13:04:25,192 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:25,197 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-07 13:04:26,637 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:26,647 INFO:Upserting chat for account 7216516818: Translator
+2025-10-07 13:04:27,536 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:27,537 INFO:Upserting chat for account 7216516818: Searchee Bot
+2025-10-07 13:04:28,691 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:28,692 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-07 13:04:29,812 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:29,813 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-07 13:04:30,779 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:30,789 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-07 13:04:32,002 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:32,003 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-07 13:04:33,369 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:33,380 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-07 13:04:34,125 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:34,128 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-07 13:04:35,072 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-07 13:04:35,081 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-07 13:04:37,089 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-07 13:04:37,089 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-07 13:04:37,095 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-07 13:04:37,130 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-07 13:04:38,212 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-07 13:04:38,216 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-07 13:04:38,287 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-07 13:04:38,361 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-07 13:04:38,440 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-07 13:04:38,524 INFO:Upserting chat for account 7216516818: FreedomVPN_bot
+2025-10-07 13:04:38,525 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-07 13:04:38,611 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-07 13:04:38,709 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-07 13:04:39,056 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-07 13:04:39,136 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-07 13:04:39,208 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-07 13:04:39,282 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-07 13:04:39,375 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-07 13:04:39,454 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-07 13:04:39,690 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-07 13:04:39,768 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-07 13:04:39,844 INFO:Upserting chat for account 7216516818: Translator
+2025-10-07 13:04:39,926 INFO:Upserting chat for account 7216516818: Searchee Bot
+2025-10-07 13:04:40,001 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-07 13:04:40,078 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-07 13:04:40,170 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-07 13:04:40,259 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-07 13:04:40,362 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-07 13:04:40,432 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-07 13:04:40,507 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-07 13:04:42,518 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-07 13:04:42,518 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-07 13:04:42,521 ERROR:Error with session ./sessions\test_session.session: file is not a database
+2025-10-09 16:10:41,145 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:41,423 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:10:45,477 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:10:45,484 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:10:45,867 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 16:10:47,882 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:47,883 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:10:47,887 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:48,162 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:10:50,173 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:10:50,551 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 16:10:50,557 ERROR:Error with session ./sessions\13097222512.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:10:50,558 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:50,823 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:10:52,797 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:10:53,174 INFO:Upserting chat for account 8011089082: Telegram
+2025-10-09 16:10:53,175 ERROR:Error with session ./sessions\13097245646.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:10:53,176 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:53,452 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:10:55,466 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:10:55,848 INFO:Upserting chat for account 8353511151: Telegram
+2025-10-09 16:10:55,849 ERROR:Error with session ./sessions\13097254641.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:10:55,850 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:56,122 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:10:58,092 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:10:58,391 INFO:Upserting chat for account 8375020569: Telegram
+2025-10-09 16:10:58,392 ERROR:Error with session ./sessions\13097272877.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:10:58,394 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:10:58,682 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:11:00,887 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:11:01,192 INFO:Upserting chat for account 8232996131: Telegram
+2025-10-09 16:11:01,193 ERROR:Error with session ./sessions\13097393405.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:01,194 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:11:01,464 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:11:03,493 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:11:03,790 INFO:Upserting chat for account 8355721588: Telegram
+2025-10-09 16:11:03,791 ERROR:Error with session ./sessions\13097607446.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:03,793 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:11:04,066 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:11:06,053 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:11:06,429 INFO:Upserting chat for account 8243685391: Telegram
+2025-10-09 16:11:06,430 ERROR:Error with session ./sessions\13097607449.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:06,432 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:11:06,719 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:11:08,711 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:11:09,014 INFO:Upserting chat for account 8266217974: Telegram
+2025-10-09 16:11:09,015 ERROR:Error with session ./sessions\13097611582.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:09,016 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:11:09,299 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:11:11,383 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:11:11,766 INFO:Upserting chat for account 8482792700: Telegram
+2025-10-09 16:11:11,766 ERROR:Error with session ./sessions\13097611590.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:11,769 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 16:11:11,815 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 16:11:15,095 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:15,103 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-09 16:11:15,968 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:15,998 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-09 16:11:18,486 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:18,497 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-09 16:11:20,450 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:20,451 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-09 16:11:22,562 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:22,574 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-09 16:11:24,588 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:24,592 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-09 16:11:25,583 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:11:25,586 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-09 16:11:25,587 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-09 16:11:25,588 ERROR:Error with session ./sessions\session_5bb6def5.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:25,588 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 16:11:25,624 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 16:11:26,685 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-09 16:11:26,688 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-09 16:11:26,923 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-09 16:11:27,122 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-09 16:11:27,193 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-09 16:11:27,265 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-09 16:11:27,355 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-09 16:11:27,356 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-09 16:11:27,357 ERROR:Error with session ./sessions\session_916cfcaa.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:11:27,358 ERROR:Error with session ./sessions\test_session.session: file is not a database
+2025-10-09 16:23:22,825 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:23:23,094 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:23:26,478 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:23:26,483 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 16:23:28,501 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:23:28,502 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:23:28,506 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:23:28,778 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:23:30,745 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 16:23:30,746 ERROR:Error with session ./sessions\13097222512.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(777000) already exists.
+2025-10-09 16:23:30,747 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:23:31,020 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:39,282 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:39,559 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:45,745 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:26:45,759 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 16:26:47,770 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:47,771 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:47,773 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:48,046 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:50,732 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:26:50,735 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 16:26:52,753 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:52,753 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:52,757 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:53,031 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:55,747 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:26:55,748 INFO:Upserting chat for account 8011089082: Telegram
+2025-10-09 16:26:57,766 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:57,767 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:26:57,771 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:26:58,065 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:02,247 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:02,270 INFO:Upserting chat for account 8353511151: Telegram
+2025-10-09 16:27:04,275 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:04,275 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:04,278 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:04,557 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:07,286 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:07,289 INFO:Upserting chat for account 8375020569: Telegram
+2025-10-09 16:27:09,295 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:09,295 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:09,298 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:09,569 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:13,316 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:13,321 INFO:Upserting chat for account 8232996131: Telegram
+2025-10-09 16:27:15,336 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:15,337 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:15,341 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:15,626 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:18,332 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:18,339 INFO:Upserting chat for account 8355721588: Telegram
+2025-10-09 16:27:20,341 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:20,341 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:20,345 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:20,618 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:23,229 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:23,235 INFO:Upserting chat for account 8243685391: Telegram
+2025-10-09 16:27:25,245 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:25,245 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:25,250 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:25,525 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:28,653 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:28,658 INFO:Upserting chat for account 8266217974: Telegram
+2025-10-09 16:27:30,669 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:30,669 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:30,674 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:30,941 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:33,936 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:33,941 INFO:Upserting chat for account 8482792700: Telegram
+2025-10-09 16:27:35,950 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 16:27:35,951 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:27:35,955 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 16:27:35,989 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 16:27:38,272 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:38,273 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-09 16:27:39,223 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:39,232 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-09 16:27:40,628 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:40,631 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-09 16:27:41,835 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:41,839 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-09 16:27:42,477 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:42,480 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-09 16:27:43,894 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:43,906 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-09 16:27:45,204 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:45,207 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-09 16:27:46,379 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:46,385 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-09 16:27:47,481 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:47,483 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-09 16:27:49,101 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:49,105 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-09 16:27:50,196 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:50,203 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-09 16:27:51,121 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:51,129 INFO:Upserting chat for account 7216516818: \u21c6\u3164\u3164\u25c1\u3164\u3164\u275a\u275a\u3164\u3164\u25b7\u3164 Kyaw Naing Phyo
+2025-10-09 16:27:52,190 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:52,196 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-09 16:27:53,480 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:53,481 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 16:27:53,533 INFO:Connecting to 149.154.175.56:443/TcpFull...
+2025-10-09 16:27:55,871 INFO:Connection to 149.154.175.56:443/TcpFull complete!
+2025-10-09 16:27:55,871 INFO:Exporting auth for new borrowed sender in DcOption(id=1, ip_address='149.154.175.56', port=443, ipv6=False, media_only=False, tcpo_only=False, cdn=False, static=False, this_port_only=False, secret=None)
+2025-10-09 16:27:58,081 INFO:Upserting chat for account 7216516818: BotFather
+2025-10-09 16:27:59,518 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:27:59,521 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-09 16:28:00,606 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:00,607 INFO:Upserting chat for account 7216516818: Khin lay
+2025-10-09 16:28:01,491 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:01,496 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-09 16:28:02,824 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:02,840 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-09 16:28:02,915 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-09 16:28:03,823 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:03,827 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-09 16:28:04,664 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:04,668 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-09 16:28:05,719 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:05,726 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-09 16:28:06,964 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:06,975 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-09 16:28:08,025 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:08,027 INFO:Upserting chat for account 7216516818: Translator
+2025-10-09 16:28:09,261 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:09,263 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-09 16:28:10,256 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:10,259 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-09 16:28:11,132 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:11,136 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-09 16:28:12,048 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:12,048 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-09 16:28:14,052 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-09 16:28:14,052 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-09 16:28:14,052 INFO:Disconnecting from 149.154.175.56:443/TcpFull...
+2025-10-09 16:28:14,052 INFO:Disconnection from 149.154.175.56:443/TcpFull complete!
+2025-10-09 16:28:14,057 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 16:28:14,099 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 16:28:15,748 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-09 16:28:15,751 INFO:Upserting chat for account 7216516818: \u5b9d\u8d1d (b\u01ceo bèi)
+2025-10-09 16:28:15,842 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-09 16:28:15,924 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-09 16:28:16,011 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-09 16:28:16,091 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-09 16:28:16,189 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-09 16:28:17,003 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 16:28:17,009 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-09 16:28:17,126 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-09 16:28:17,619 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-09 16:28:17,720 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-09 16:28:17,811 INFO:Upserting chat for account 7216516818: \u21c6\u3164\u3164\u25c1\u3164\u3164\u275a\u275a\u3164\u3164\u25b7\u3164 Kyaw Naing Phyo
+2025-10-09 16:28:17,902 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-09 16:28:18,021 INFO:Upserting chat for account 7216516818: BotFather
+2025-10-09 16:28:18,111 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-09 16:28:18,195 INFO:Upserting chat for account 7216516818: Khin lay
+2025-10-09 16:28:18,282 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-09 16:28:18,367 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-09 16:28:18,439 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-09 16:28:18,515 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-09 16:28:18,593 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-09 16:28:18,857 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-09 16:28:18,959 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-09 16:28:19,030 INFO:Upserting chat for account 7216516818: Translator
+2025-10-09 16:28:19,112 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-09 16:28:19,182 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-09 16:28:19,361 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-09 16:28:19,500 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-09 16:28:21,509 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-09 16:28:21,510 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-09 16:39:14,300 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:39:14,576 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:41:44,016 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:41:44,291 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:41:46,270 ERROR:Error with session ./sessions\13097180472.session: No user has "devtaisheng" as username
+2025-10-09 16:41:46,271 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:41:46,547 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:41:48,536 ERROR:Error with session ./sessions\13097222512.session: No user has "devtaisheng" as username
+2025-10-09 16:41:48,537 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:41:56,128 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:41:56,402 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:41:58,374 ERROR:Error with session ./sessions\13097180472.session: No user has "devtaisheng" as username
+2025-10-09 16:41:58,375 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:41:58,644 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:42:18,288 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:42:18,566 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:42:20,715 ERROR:Error with session ./sessions\13097180472.session: Cannot find any entity corresponding to "7216516818"
+2025-10-09 16:42:20,716 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:42:20,989 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:42:22,961 ERROR:Error with session ./sessions\13097222512.session: Cannot find any entity corresponding to "7216516818"
+2025-10-09 16:42:22,962 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:42:23,232 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:43:32,369 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:43:32,643 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:43:34,620 ERROR:Error with session ./sessions\13097180472.session: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 16:43:34,621 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:43:34,891 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:43:36,838 ERROR:Error with session ./sessions\13097222512.session: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 16:43:36,838 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:43:37,121 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:43:39,184 ERROR:Error with session ./sessions\13097245646.session: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 16:43:39,185 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:43:39,452 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:45:17,981 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:45:18,258 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:45:20,211 ERROR:Error with session ./sessions\13097180472.session: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 16:45:20,212 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:45:20,487 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:45:43,316 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:45:43,590 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:45:45,566 ERROR:Error with session ./sessions\13097180472.session: No user has "devtaisheng" as username
+2025-10-09 16:45:45,567 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:45:45,844 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:45:47,846 ERROR:Error with session ./sessions\13097222512.session: No user has "devtaisheng" as username
+2025-10-09 16:45:47,847 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:45:48,121 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:45:50,089 ERROR:Error with session ./sessions\13097245646.session: No user has "devtaisheng" as username
+2025-10-09 16:45:50,090 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:45:50,358 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:47:58,346 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:47:58,614 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:48:00,823 ERROR:Error with session sessions\13097180472: No user has "devtaisheng" as username
+2025-10-09 16:48:30,649 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:48:30,917 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:49:40,877 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:49:41,154 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:49:43,169 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 16:53:39,449 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:53:39,724 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:53:41,705 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 16:53:58,246 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:53:58,517 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:54:00,471 ERROR:Error with session sessions\13097180472: No user has "devtaisheng" as username
+2025-10-09 16:54:09,253 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:54:09,522 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:54:11,498 ERROR:Error with session sessions\13097180472: No user has "devtaisheng" as username
+2025-10-09 16:59:02,391 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 16:59:02,659 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 16:59:04,605 ERROR:Error with session sessions\13097180472: No user has "devtaisheng" as username
+2025-10-09 17:00:02,792 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:00:03,071 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:00:05,319 ERROR:Error with session sessions\13097180472: No user has "devtaisheng" as username
+2025-10-09 17:00:34,360 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 17:00:34,398 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 17:01:18,845 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 17:01:18,898 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 17:01:47,046 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:01:47,329 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:01:49,350 ERROR:Error with session sessions\13097180472: Cannot find any entity corresponding to "+95 9694560703"
+2025-10-09 17:06:24,181 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:06:24,453 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:06:26,405 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 17:07:04,254 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:07:04,529 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:07:06,605 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 17:09:53,303 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:09:53,582 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:09:55,839 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 17:10:25,633 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:10:25,910 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:10:28,212 ERROR:Error with session sessions\13097180472: Cannot find any entity corresponding to "+95 9694560703"
+2025-10-09 17:12:23,644 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:12:23,915 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:15:02,949 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:15:03,224 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:15:30,195 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:15:30,466 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:18:49,048 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:18:49,319 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:18:51,267 ERROR:Error with session sessions\13097180472: Cannot find any entity corresponding to "+95 9958072063"
+2025-10-09 17:19:19,523 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 17:19:19,560 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 17:19:29,234 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 17:19:29,277 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 17:19:32,860 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 17:19:32,896 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 17:30:13,917 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 17:30:13,956 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 17:30:14,266 ERROR:Request caused struct.error: required argument is not an integer: SendMessageRequest(peer=InputPeerUser(user_id=7216516818, access_hash='d919f276e10b80ab0b5bf4dad0121663'), message='Hello from my user account!', no_webpage=False, silent=None, background=None, clear_draft=False, noforwards=None, update_stickersets_order=None, invert_media=None, allow_paid_floodskip=None, reply_to=None, random_id=6178362311273813712, reply_markup=None, entities=[], schedule_date=None, send_as=None, quick_reply_shortcut=None, effect=None, allow_paid_stars=None, suggested_post=None)
+2025-10-09 17:30:14,267 ERROR:Error with session sessions\session_5bb6def5: required argument is not an integer
+2025-10-09 17:30:23,962 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:30:24,235 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:30:25,952 ERROR:Request caused struct.error: required argument is not an integer: SendMessageRequest(peer=InputPeerUser(user_id=7216516818, access_hash='d919f276e10b80ab0b5bf4dad0121663'), message='Hello from my user account!', no_webpage=False, silent=None, background=None, clear_draft=False, noforwards=None, update_stickersets_order=None, invert_media=None, allow_paid_floodskip=None, reply_to=None, random_id=-3380984843718693654, reply_markup=None, entities=[], schedule_date=None, send_as=None, quick_reply_shortcut=None, effect=None, allow_paid_stars=None, suggested_post=None)
+2025-10-09 17:30:25,952 ERROR:Error with session sessions\13097180472: required argument is not an integer
+2025-10-09 17:30:38,773 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:30:39,059 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:30:40,720 ERROR:Request caused struct.error: required argument is not an integer: SendMessageRequest(peer=InputPeerUser(user_id='7216516818', access_hash='d919f276e10b80ab0b5bf4dad0121663'), message='Hello from my user account!', no_webpage=False, silent=None, background=None, clear_draft=False, noforwards=None, update_stickersets_order=None, invert_media=None, allow_paid_floodskip=None, reply_to=None, random_id=3697546448224465357, reply_markup=None, entities=[], schedule_date=None, send_as=None, quick_reply_shortcut=None, effect=None, allow_paid_stars=None, suggested_post=None)
+2025-10-09 17:30:40,720 ERROR:Error with session sessions\13097180472: required argument is not an integer
+2025-10-09 17:32:06,170 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:32:06,441 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:32:53,022 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:32:53,291 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:34:03,986 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:34:04,254 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:34:06,206 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 17:34:55,449 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:34:55,719 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 17:34:57,670 ERROR:Error with session sessions\13097180472: Could not find the input entity for PeerUser(user_id=7216516818) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.
+2025-10-09 17:53:19,982 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 17:53:20,255 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:04:39,180 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:04:39,219 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:06:17,916 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:06:17,965 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:06:18,459 ERROR:Error with session sessions\session_d56d9979.session: An invalid Peer was used. Make sure to pass the right peer type and that the value is valid (for instance, bots cannot start conversations) (caused by SendMessageRequest)
+2025-10-09 18:07:29,580 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:07:29,615 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:11:26,659 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:11:26,694 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:11:27,071 ERROR:Error with session sessions\session_d56d9979.session: cannot import name 'ImportContacts' from 'telethon.tl.functions.contacts' (C:\laragon\bin\python\python-3.13\Lib\site-packages\telethon\tl\functions\contacts.py)
+2025-10-09 18:14:37,500 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:37,777 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:41,600 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:14:41,605 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 18:14:43,615 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:43,616 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:43,620 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:43,894 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:47,861 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:14:47,867 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 18:14:49,870 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:49,871 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:49,874 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:50,150 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:53,578 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:14:53,579 INFO:Upserting chat for account 8011089082: Telegram
+2025-10-09 18:14:55,586 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:55,587 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:55,591 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:14:55,869 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:14:59,829 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:14:59,830 INFO:Upserting chat for account 8353511151: Telegram
+2025-10-09 18:15:01,837 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:01,837 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:01,840 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:02,115 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:05,886 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:05,889 INFO:Upserting chat for account 8375020569: Telegram
+2025-10-09 18:15:07,905 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:07,905 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:07,909 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:08,222 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:11,591 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:11,592 INFO:Upserting chat for account 8232996131: Telegram
+2025-10-09 18:15:13,596 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:13,596 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:13,601 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:13,894 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:16,747 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:16,754 INFO:Upserting chat for account 8355721588: Telegram
+2025-10-09 18:15:18,759 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:18,760 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:18,764 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:19,032 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:22,639 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:22,646 INFO:Upserting chat for account 8243685391: Telegram
+2025-10-09 18:15:24,664 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:24,665 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:24,669 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:24,939 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:27,991 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:28,001 INFO:Upserting chat for account 8266217974: Telegram
+2025-10-09 18:15:30,014 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:30,014 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:30,017 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:30,316 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:34,128 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:34,129 INFO:Upserting chat for account 8482792700: Telegram
+2025-10-09 18:15:36,138 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:15:36,138 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:15:36,143 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:36,178 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:37,991 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-09 18:15:38,071 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-09 18:15:38,073 INFO:Upserting chat for account 7216516818: 
+2025-10-09 18:15:38,143 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-09 18:15:38,416 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-09 18:15:38,683 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-09 18:15:38,761 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-09 18:15:38,848 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-09 18:15:39,620 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:39,621 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-09 18:15:39,988 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-09 18:15:40,387 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-09 18:15:40,655 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-09 18:15:40,736 INFO:Upserting chat for account 7216516818: \u21c6\u3164\u3164\u25c1\u3164\u3164\u275a\u275a\u3164\u3164\u25b7\u3164 Kyaw Naing Phyo
+2025-10-09 18:15:40,823 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-09 18:15:41,160 INFO:Upserting chat for account 7216516818: BotFather
+2025-10-09 18:15:41,231 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-09 18:15:41,315 INFO:Upserting chat for account 7216516818: Khin lay
+2025-10-09 18:15:41,418 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-09 18:15:41,677 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-09 18:15:41,755 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-09 18:15:41,847 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-09 18:15:42,109 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-09 18:15:42,393 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-09 18:15:42,659 INFO:Upserting chat for account 7216516818: Translator
+2025-10-09 18:15:42,918 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-09 18:15:43,176 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-09 18:15:43,258 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-09 18:15:43,530 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-09 18:15:45,534 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:45,534 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:45,540 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:45,591 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:46,778 INFO:Upserting chat for account 7216516818: \u4e03\u9f99
+2025-10-09 18:15:46,871 INFO:Upserting chat for account 7216516818: \u548c\u5c1a
+2025-10-09 18:15:46,872 INFO:Upserting chat for account 7216516818: 
+2025-10-09 18:15:46,949 INFO:Upserting chat for account 7216516818: \u6cf0\u80dc (Tài Shèng) \U0001f948
+2025-10-09 18:15:47,031 INFO:Upserting chat for account 7216516818: \u5c0f\u521a ( \u7f51\u7ba1 )
+2025-10-09 18:15:47,150 INFO:Upserting chat for account 7216516818: Leo – match and meet new friends
+2025-10-09 18:15:47,255 INFO:Upserting chat for account 7216516818: \u963f\u8fdb (\u4eba\u4e8b)
+2025-10-09 18:15:47,373 INFO:Upserting chat for account 7216516818: Ko Lin Mu
+2025-10-09 18:15:48,305 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:15:48,309 INFO:Upserting chat for account 7216516818: Telegram
+2025-10-09 18:15:48,768 INFO:Upserting chat for account 7216516818: \u59ae\u8d56 (hr)
+2025-10-09 18:15:48,852 INFO:Upserting chat for account 7216516818: Stickers
+2025-10-09 18:15:48,933 INFO:Upserting chat for account 7216516818: Facebook Videos Downloader | FB Reels
+2025-10-09 18:15:49,016 INFO:Upserting chat for account 7216516818: \u21c6\u3164\u3164\u25c1\u3164\u3164\u275a\u275a\u3164\u3164\u25b7\u3164 Kyaw Naing Phyo
+2025-10-09 18:15:49,149 INFO:Upserting chat for account 7216516818: \u5229\u6210\u5b98\u65b9\u4eba\u4e8b \U0001f4a2
+2025-10-09 18:15:49,268 INFO:Upserting chat for account 7216516818: BotFather
+2025-10-09 18:15:49,372 INFO:Upserting chat for account 7216516818: Ghost info \U0001f480
+2025-10-09 18:15:49,456 INFO:Upserting chat for account 7216516818: Khin lay
+2025-10-09 18:15:49,591 INFO:Upserting chat for account 7216516818: Daw Thidar Khaing ( Htun Yati)
+2025-10-09 18:15:49,799 INFO:Upserting chat for account 7216516818: ADinside bot
+2025-10-09 18:15:49,924 INFO:Upserting chat for account 7216516818: \u1021\u1018\u1006\u102d\u102f\u1004\u103a
+2025-10-09 18:15:50,009 INFO:Upserting chat for account 7216516818: CHIT PHYO\uff0c\uff08\u4eba\u4e8b\uff09
+2025-10-09 18:15:50,084 INFO:Upserting chat for account 7216516818: Protectron
+2025-10-09 18:15:50,166 INFO:Upserting chat for account 7216516818: Yandex Translate
+2025-10-09 18:15:50,235 INFO:Upserting chat for account 7216516818: Translator
+2025-10-09 18:15:50,316 INFO:Upserting chat for account 7216516818: GIFinder
+2025-10-09 18:15:50,390 INFO:Upserting chat for account 7216516818: Report Impersonation
+2025-10-09 18:15:50,463 INFO:Upserting chat for account 7216516818: \u5c0f\u660e { HR }
+2025-10-09 18:15:50,551 INFO:Upserting chat for account 7216516818: smsActivateruBot
+2025-10-09 18:15:52,560 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:52,560 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:52,564 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:52,602 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:52,797 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:52,797 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:52,800 WARNING:Session file ./sessions\session_aa35f959.session exists but Telegram session is unauthorized. Skipping.
+2025-10-09 18:15:52,801 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:15:52,836 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:15:53,125 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 18:15:53,576 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 18:15:53,687 INFO:Upserting chat for account 8297286605: \u6cf0\u80dc (Tài Shèng)
+2025-10-09 18:15:53,692 ERROR:Error with session ./sessions\session_d56d9979.session: duplicate key value violates unique constraint "telegram_chats_pkey"
+DETAIL:  Key (id)=(7216516818) already exists.
+2025-10-09 18:19:26,287 INFO:Connecting to 91.108.56.177:443/TcpFull...
+2025-10-09 18:19:26,322 INFO:Connection to 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:19:27,993 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:19:27,998 INFO:Upserting chat for account 8297286605: \u6cf0\u80dc (Tài Shèng)
+2025-10-09 18:19:28,721 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:19:28,724 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 18:19:28,771 INFO:Connecting to 149.154.175.51:443/TcpFull...
+2025-10-09 18:19:30,940 INFO:Connection to 149.154.175.51:443/TcpFull complete!
+2025-10-09 18:19:30,940 INFO:Exporting auth for new borrowed sender in DcOption(id=1, ip_address='149.154.175.51', port=443, ipv6=False, media_only=False, tcpo_only=False, cdn=False, static=False, this_port_only=False, secret=None)
+2025-10-09 18:19:32,198 INFO:Upserting chat for account 8297286605: Telegram
+2025-10-09 18:19:33,246 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:19:33,248 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 18:19:34,636 INFO:Upserting chat for account 8297286605: BotFather
+2025-10-09 18:19:34,640 INFO:Starting direct file download in chunks of 65536 at 0, stride 65536
+2025-10-09 18:19:34,871 INFO:Upserting chat for account 8297286605: AP11.11
+2025-10-09 18:19:36,882 INFO:Disconnecting from 91.108.56.177:443/TcpFull...
+2025-10-09 18:19:36,882 INFO:Disconnection from 91.108.56.177:443/TcpFull complete!
+2025-10-09 18:19:36,882 INFO:Disconnecting from 149.154.175.51:443/TcpFull...
+2025-10-09 18:19:36,882 INFO:Disconnection from 149.154.175.51:443/TcpFull complete!
+2025-10-09 18:28:02,313 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:02,585 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:05,690 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:05,710 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 18:28:07,726 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:07,727 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:07,735 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:08,004 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:11,048 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:11,055 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 18:28:13,061 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:13,062 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:13,070 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:13,347 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:16,870 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:16,872 INFO:Upserting chat for account 8011089082: Telegram
+2025-10-09 18:28:18,879 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:18,880 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:18,886 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:19,161 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:22,375 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:22,376 INFO:Upserting chat for account 8353511151: Telegram
+2025-10-09 18:28:24,385 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:24,386 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:24,392 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:24,663 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:27,744 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:27,745 INFO:Upserting chat for account 8375020569: Telegram
+2025-10-09 18:28:29,751 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:29,752 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:29,758 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:30,030 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:37,288 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:37,291 INFO:Upserting chat for account 8232996131: Telegram
+2025-10-09 18:28:39,301 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:39,301 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:39,306 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:39,592 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:44,162 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:44,164 INFO:Upserting chat for account 8355721588: Telegram
+2025-10-09 18:28:46,176 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:46,177 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:46,182 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:46,454 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:49,237 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:49,240 INFO:Upserting chat for account 8243685391: Telegram
+2025-10-09 18:28:51,258 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:51,258 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:51,262 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:51,533 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:54,426 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:54,428 INFO:Upserting chat for account 8266217974: Telegram
+2025-10-09 18:28:56,441 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:56,441 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:56,446 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:28:56,723 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:28:59,430 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:28:59,441 INFO:Upserting chat for account 8482792700: Telegram
+2025-10-09 18:29:01,453 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:29:01,454 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:06,839 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:07,109 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:11,388 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:11,402 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 18:31:13,409 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:13,411 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:13,419 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:13,691 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:16,912 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:16,915 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 18:31:18,928 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:18,930 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:18,935 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:19,209 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:22,398 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:22,440 INFO:Upserting chat for account 8011089082: Telegram
+2025-10-09 18:31:24,451 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:24,452 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:24,458 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:24,746 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:27,633 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:27,637 INFO:Upserting chat for account 8353511151: Telegram
+2025-10-09 18:31:29,650 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:29,651 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:29,660 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:29,938 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:32,737 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:32,740 INFO:Upserting chat for account 8375020569: Telegram
+2025-10-09 18:31:34,744 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:34,745 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:34,753 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:35,023 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:38,138 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:38,145 INFO:Upserting chat for account 8232996131: Telegram
+2025-10-09 18:31:40,165 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:40,166 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:40,168 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:40,437 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:43,178 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:43,183 INFO:Upserting chat for account 8355721588: Telegram
+2025-10-09 18:31:45,188 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:45,188 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:45,191 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:45,478 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:48,401 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:48,409 INFO:Upserting chat for account 8243685391: Telegram
+2025-10-09 18:31:50,426 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:50,427 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:50,430 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:50,708 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:53,681 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:53,691 INFO:Upserting chat for account 8266217974: Telegram
+2025-10-09 18:31:55,708 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:55,709 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:55,715 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:31:55,986 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:31:58,783 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:31:58,784 INFO:Upserting chat for account 8482792700: Telegram
+2025-10-09 18:32:00,800 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:32:00,802 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:33:10,684 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:33:10,958 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:34:18,128 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:34:18,400 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:34:25,857 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:34:26,134 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:39:02,420 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:39:02,687 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:18,163 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:18,437 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:22,057 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:22,067 INFO:Upserting chat for account 7346842406: Telegram
+2025-10-09 18:41:24,079 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:24,081 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:24,087 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:24,361 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:27,764 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:27,765 INFO:Upserting chat for account 8392580815: Telegram
+2025-10-09 18:41:29,776 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:29,777 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:29,781 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:30,054 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:33,595 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:33,597 INFO:Upserting chat for account 8011089082: Telegram
+2025-10-09 18:41:35,609 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:35,609 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:35,612 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:35,884 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:39,478 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:39,485 INFO:Upserting chat for account 8353511151: Telegram
+2025-10-09 18:41:41,495 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:41,496 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:41,500 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:41,773 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:45,161 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:45,169 INFO:Upserting chat for account 8375020569: Telegram
+2025-10-09 18:41:47,181 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:47,182 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:47,189 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:47,477 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:51,406 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:51,432 INFO:Upserting chat for account 8232996131: Telegram
+2025-10-09 18:41:53,441 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:53,442 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:53,450 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:53,724 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:57,032 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:41:57,033 INFO:Upserting chat for account 8355721588: Telegram
+2025-10-09 18:41:59,044 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:59,045 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:41:59,052 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:41:59,321 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:42:02,614 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:42:02,616 INFO:Upserting chat for account 8243685391: Telegram
+2025-10-09 18:42:04,629 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:42:04,630 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:42:04,635 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:42:04,899 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:42:08,093 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:42:08,095 INFO:Upserting chat for account 8266217974: Telegram
+2025-10-09 18:42:10,097 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:42:10,097 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:42:10,100 INFO:Connecting to 149.154.175.50:443/TcpFull...
+2025-10-09 18:42:10,371 INFO:Connection to 149.154.175.50:443/TcpFull complete!
+2025-10-09 18:42:13,701 INFO:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-09 18:42:13,714 INFO:Upserting chat for account 8482792700: Telegram
+2025-10-09 18:42:15,731 INFO:Disconnecting from 149.154.175.50:443/TcpFull...
+2025-10-09 18:42:15,732 INFO:Disconnection from 149.154.175.50:443/TcpFull complete!

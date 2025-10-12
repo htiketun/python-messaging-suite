@@ -138,7 +138,7 @@ async def fetch_and_sync(session_file, conn):
             await client.disconnect()
             return
 
-        full = await client(GetFullUserRequest(me.username)) if me.username else None
+        full = await client(GetFullUserRequest(me.id)) if me.id else None
         # Save the full user info as JSON for inspection
         session_dir = os.path.dirname(session_file)
         full_json_path = os.path.join(session_dir, os.path.basename(session_file) + ".full.json")
@@ -165,12 +165,12 @@ async def fetch_and_sync(session_file, conn):
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(me_dict, f, ensure_ascii=False, indent=4)
 
-        msg = f"Syncing chats for: {me.username or me.phone}"
+        msg = f"Syncing chats for: {me.id or me.phone}"
         print(msg)
 
         async for dialog in client.iter_dialogs():
             #logg message detail
-            if dialog.is_user:
+            # if dialog.is_user:
                 
                 if dialog.unread_count > 0:
                     counts += dialog.unread_count
@@ -182,8 +182,8 @@ async def fetch_and_sync(session_file, conn):
                 bio = ""
                 try:
                     # Try to get bio if available (requires GetFullUserRequest)
-                    if hasattr(entity, "username") and entity.username:
-                        full_user = await client(GetFullUserRequest(entity.username))
+                    if hasattr(entity, "id") and entity.id:
+                        full_user = await client(GetFullUserRequest(entity.id))
                         # Try to extract date of birth (dob) if available
                         dob = ""
                         if hasattr(full_user.full_user, "birthday") and full_user.full_user.birthday:

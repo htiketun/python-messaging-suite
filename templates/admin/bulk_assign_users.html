@@ -1,0 +1,155 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block title %}{{ title }} | {{ site_title|default:"Telegram Admin" }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label='api' %}">Api</a>
+    &rsaquo; <a href="{% url 'admin:api_telegramaccount_changelist' %}">Telegram accounts</a>
+    &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="module aligned">
+    <h1>{{ title }}</h1>
+    
+    <p>Assign individual users to each account or leave unassigned.</p>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <table id="assignment-table">
+            <thead>
+                <tr>
+                    <th>Account ID</th>
+                    <th>Phone</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Current User</th>
+                    <th>Assign To</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                <tr>
+                    <td>{{ account.id }}</td>
+                    <td>{{ account.phone|default:"-" }}</td>
+                    <td>{{ account.username|default:"-" }}</td>
+                    <td>{{ account.first_name }} {{ account.last_name }}</td>
+                    <td>
+                        {% if account.user %}
+                            <strong>{{ account.user.name|default:account.user.email }}</strong>
+                        {% else %}
+                            <span style="color: orange;">Unassigned</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <select name="user_{{ account.id }}" class="user-select">
+                            <option value="">Keep current assignment</option>
+                            <option value="unassign" {% if not account.user %}selected{% endif %}>Unassign</option>
+                            {% for user in users %}
+                            <option value="{{ user.id }}" {% if account.user and account.user.id == user.id %}selected{% endif %}>
+                                {{ user.name|default:user.email }} ({{ user.email }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="submit-row">
+            <input type="submit" value="Update Assignments" class="default" />
+            <p class="deletelink-box">
+                <a href="{% url 'admin:api_telegramaccount_changelist' %}" class="deletelink">Cancel</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<style>
+    #assignment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    
+    #assignment-table th, #assignment-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+    }
+    
+    #assignment-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+    }
+    
+    .user-select {
+        width: 250px;
+        padding: 5px;
+    }
+    
+    #assignment-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    #assignment-table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add bulk selection functionality
+    const selectAll = document.createElement('div');
+    selectAll.innerHTML = `
+        <div style="margin: 10px 0; padding: 10px; background: #f0f0f0; border-radius: 5px;">
+            <strong>Bulk Actions:</strong>
+            <button type="button" onclick="bulkAssign('unassign')">Unassign All</button>
+            <select id="bulk-user-select" style="margin: 0 10px;">
+                <option value="">Select user for bulk assignment...</option>
+                {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name|default:user.email }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" onclick="bulkAssignToUser()">Assign All to Selected User</button>
+        </div>
+    `;
+    
+    const form = document.querySelector('form');
+    form.insertBefore(selectAll, document.getElementById('assignment-table'));
+});
+
+function bulkAssign(action) {
+    const selects = document.querySelectorAll('.user-select');
+    selects.forEach(select => {
+        if (action === 'unassign') {
+            select.value = 'unassign';
+        }
+    });
+}
+
+function bulkAssignToUser() {
+    const bulkSelect = document.getElementById('bulk-user-select');
+    const userId = bulkSelect.value;
+    
+    if (!userId) {
+        alert('Please select a user first.');
+        return;
+    }
+    
+    const selects = document.querySelectorAll('.user-select');
+    selects.forEach(select => {
+        select.value = userId;
+    });
+}
+</script>
+{% endblock %}
