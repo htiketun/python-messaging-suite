@@ -60,7 +60,7 @@ def build_me_dict(me, session_file):
 from openai import OpenAI
 import random
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="1")
 def predict_gender_age(name, bio, dob):
     if dob:
         prompt = (

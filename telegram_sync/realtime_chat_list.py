@@ -505,7 +505,7 @@ class RealtimeChatListService:
         Predict gender and age using OpenAI API
         Same logic as in sync_chats.py
         """
-        openai_client = OpenAI(api_key="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")
+        openai_client = OpenAI(api_key="1")
         
         if dob:
             prompt = (
