@@ -42,3 +42,4 @@ telegram_sync/__pycache__/
 # Bat and shell scripts (optional, if you don't want to track them)
 run.bat
 run.sh
+commit.py
